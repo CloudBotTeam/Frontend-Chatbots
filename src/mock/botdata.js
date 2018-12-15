@@ -41,11 +41,27 @@ const BotDetail = function(id){
     }
 }
 
-//请求包含 '/robots' 字段的接口，会被拦截到该随机数据格式
+const DeleteBot = function(opt){
+    const id = opt.url.substr(opt.url.length-5,5);
+    console.log('DeleteBotID', id);
+}
+
+const DeleteGroups = function(opt){
+    let data = JSON.parse(opt.body);
+    console.log('BotID', data.bot_id, 'DeleteGroupID', data.delet_groups);
+}
+
+// 请求包含 '/robots' 字段的接口，会被拦截到该随机数据格式
 Mock.mock('/robots', 'get', BotData);
 
+// '/robots/{{bot_id}}'
 Mock.mock(RegExp('/robots' + ".*"), "get", (opt) =>{
-    // 最佳实践，将请求和参数都打印出来，以便调试
     const id = opt.url.substr(opt.url.length-5,5);
     return Mock.mock(BotDetail(id));
 });
+
+// '/robots/deletegroups'
+Mock.mock('/robots/deletegroups', 'delete', DeleteGroups);
+
+// '/robots/{{bot_id}}'
+Mock.mock(RegExp('/robots' + ".*"), "delete", DeleteBot);

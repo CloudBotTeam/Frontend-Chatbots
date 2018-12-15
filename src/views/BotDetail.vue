@@ -181,6 +181,28 @@
             },
 
             remove(){
+                var groupslist = [];
+                for(let i = 0; i < this.delet_groups.length; i++)
+                    groupslist.push(this.delet_groups[i].group_id);
+
+                //delete请求
+                this.$http.delete('/robots/deletegroups',{
+                    data:{
+                        bot_id: this.bot_id,
+                        delet_groups: groupslist,
+                    },
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((err) => {
+                    console.log('Botdetail delete请求错误：', err);
+                })
+                
+                //删除前端数据
                 for(let i = 0; i < this.delet_groups.length; i++){
                     for(let j = 0; j < this.managed_groups.length; j++){
                         if(this.delet_groups[i].group_id === this.managed_groups[j].group_id){

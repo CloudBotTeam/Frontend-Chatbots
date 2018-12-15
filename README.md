@@ -194,7 +194,7 @@ npm run dev
 
 #### 基本信息
 
-**Path：** /robots/deletegroups/{{bot_id}}
+**Path：** /robots/deletegroups
 
 **Method：** DELETE
 
@@ -217,7 +217,7 @@ npm run dev
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | bot_id  |  string  |      |    |
-| group_list  |  object[]  |      |  item 类型: object  |
+| delet_groups |  object[]  |      |  item 类型: object  |
 | group_id  |  string  |      |    |
 
 
@@ -355,7 +355,7 @@ npm run dev
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | group_id  |  string  |      |    |
-| serv_list  |  object[]  |      |  item 类型: object  |
+| delet_servs |  object[]  |      |  item 类型: object  |
 | serv_id  |  string  |      |    |
 
 
@@ -368,4 +368,3 @@ npm run dev
 
 2. 目前登录也是用 mock 来验证用户名密码，如果要做登录的话去掉 mock 发后端验证用户名密码即可，如果不做的话就用目前的假登录也行；
 3. chatbot 和 group 页删除 bot 或 group 一次只能删一个，请求数据是 string （相应id）；botdetail 和 groupdetail 页删除 group 或 service 可以批量删，请求数据是 object[] （要删除的id列表）；都试了一下，最后用哪种都行；
-

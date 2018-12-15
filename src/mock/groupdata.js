@@ -41,6 +41,16 @@ const GroupDetail = function(id){
     }
 }
 
+const DeleteGroup = function(opt){
+    const id = opt.url.substr(opt.url.length-5,5);
+    console.log('DeleteGroupID:', id);
+}
+
+const DeleteServs = function(opt){
+    let data = JSON.parse(opt.body);
+    console.log('GroupID:', data.group_id, 'DeleteServID:', data.delet_servs);
+}
+
 //请求包含 '/groups' 字段的接口，会被拦截到该随机数据格式
 Mock.mock('/groups', 'get', GroupData);
 
@@ -50,4 +60,10 @@ Mock.mock(RegExp('/groups' + ".*"), "get", (opt) =>{
     const group_id = opt.url.substr(opt.url.length-5,5);
     return Mock.mock(GroupDetail(group_id));
 });
+
+// '/robots/deleteservs'
+Mock.mock('/groups/deleteservs', 'delete', DeleteServs);
+
+//'/groups/{{group_id}}'
+Mock.mock(RegExp('/groups' + ".*"), "delete", DeleteGroup);
 

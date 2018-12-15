@@ -149,7 +149,29 @@
                     console.log("连接错误"+err);
                 });
             },
-            remove(){
+            remove(){    
+                var servslist = [];
+                for(let i = 0; i < this.delet_servs.length; i++)
+                    servslist.push(this.delet_servs[i].serv_id);
+
+                //delete请求
+                this.$http.delete('/groups/deleteservs',{
+                    data:{
+                        group_id: this.group_id,
+                        delet_servs: servslist,
+                    },
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then((response) => {
+                    console.log(response);  
+                })
+                .catch((err) => {
+                    console.log('Groupdetail delete请求错误：', err);
+                })
+                
+                //删除前端数据
                 console.log(this.delet_servs);
                 for(let i = 0; i < this.delet_servs.length; i++){
                     for(let j = 0; j < this.managed_servs.length; j++){
