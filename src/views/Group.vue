@@ -1,0 +1,239 @@
+<template>
+  <div class="animated fadeIn">
+
+    <Row>
+        <div style="" class="doc-header">
+            <h1>Group List</h1>
+        </div>
+        <br>
+        
+        <Col :md="24">   
+            <div style="position:relative;">
+                <Table :columns="columns7" :data="page_group_list" ref="table"></Table>    
+            </div>
+
+            <Page
+                :total="this.group_list.length"
+                show-total
+                @on-change="setInitPage"
+                style="text-align:right;margin-top:50px"
+            ></Page>
+        </Col>
+    </Row>
+  </div>
+</template>
+
+<script>
+var vue;
+var uploader;
+
+export default {
+    name: "buttons",
+    data() {
+        return {
+            progresshow: false,
+            progresscount: 0,
+            progresstatus: "active",
+            progressspeed: 0,
+            group_list:[],
+    
+          pageindex: 1,
+          page_group_list: [],
+          lodding: false,
+          list_loadding: false,
+          columns7: [
+            {
+              title: "群名称",
+              key: "group_name",
+              ellipsis: "true"
+            },
+            {
+              title: "群id",
+              ellipsis: "true",
+              key: "group_id"
+            },
+            {
+              title: "创建时间",
+              ellipsis: "true",
+              key: "timestamp"
+            },
+            {
+              title: "类型",
+              key: "group_type",
+              ellipsis: "true",
+            },
+            
+            {
+                title: "操作",
+                key: "action",
+                align: "center",
+                ellipsis: "true",
+
+                render: (h, params) => {
+                    const task_status = parseInt(params.row.task_status);
+                    
+                    return h("div", [
+                        h(
+                            "Button",
+                            {
+                                props: {
+                                    type: "primary",
+                                    size: "small"
+                                },
+                                style: {
+                                    marginRight: "5px"
+                                },
+                                on: {
+                                    click: () => {
+                                        this.$router.push({
+                                            path:
+                                            "groupdetail/" + 
+                                            this.group_list[(this.pageindex - 1) * 10 + params.index].group_id
+                                        });
+                                    }
+                                }
+                            },
+                            "查看"
+                        ),
+                        h(
+                            "Button",
+                            {
+                                props: {
+                                    type: "error",
+                                    size: "small"
+                                },
+                                on: {
+                                    click: () => {
+                                        this.remove(params.index);
+                                    }
+                                }
+                            },
+                            "删除"
+                        )
+                    ]);
+            
+                } //render
+            } //{
+        ] //cloumn
+    }; //return
+  }, //data
+  
+  methods: {
+    remove(index) {
+      //delete请求
+      this.$http.delete('/groups/' + this.group_list[index].group_id,{
+        headers: {"Content-Type": "application/x-www-form-urlencoded"}
+      })
+      .then((response) => {
+        console.log(response);  
+      })
+      .catch((err) => {
+        console.log('Chatbot delete请求错误：', err);
+      })
+
+      //删除前端数据
+      this.group_list.splice(index, 1);
+
+      //更新page组件当前页视图
+      //太坑了太坑了太坑了
+      var page = this.pageindex;
+      this.page_group_list = [];
+      for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
+        if (i < this.group_list.length) {
+          this.page_group_list.push(this.group_list[i]);
+        }
+      }
+    },
+    setInitPage(page) {
+      this.page_group_list = [];
+      this.pageindex = page;
+      let group_list = this.group_list;
+      for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
+        if (i < group_list.length) {
+          this.page_group_list.push(this.group_list[i]);
+        }
+      }
+    },
+    getGroupdata(){
+        this.$http.get('/groups') //使用axios发送请求
+          .then((res)=>{ //连接成功后回调函数
+            console.log("get '/groups' 成功");
+            this.group_list = res.data.data;
+
+            //显示第一页
+            //太坑了...终于解决了page_group_list视图不及时渲染的问题
+            this.pageindex = 1;
+            for (let i = 0; i < 10; i++) {
+              if (i < this.group_list.length) {
+                this.page_group_list.push(this.group_list[i]);
+              }
+            }
+          })
+          .catch(function(err){
+            console.log("连接错误"+err);
+          });
+      }
+  },
+  mounted() {
+    const vue = this;
+    this.list_loadding = true;
+    setTimeout(function() {
+      vue.list_loadding = false;
+    }, 2000);
+    this.setInitPage(1);
+
+    this.getGroupdata();
+  }
+};
+</script>
+
+
+<style type="text/css" scoped>
+.ivu-tag-dot {
+  border: none !important;
+}
+tr.ivu-table-row-hover td .ivu-tag-dot {
+  background-color: #ebf7ff !important;
+}
+
+.demo-i-circle-custom h1 {
+  color: #3f414d;
+  font-size: 10px;
+  font-weight: normal;
+}
+.demo-i-circle-custom p {
+  color: #657180;
+  font-size: 8px;
+  margin: 5px 0 2px;
+}
+.demo-i-circle-custom span {
+  display: block;
+  padding-top: 15px;
+  color: #657180;
+  font-size: 10px;
+}
+.demo-i-circle-custom span :before {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 1px;
+  margin: 0 auto;
+  background: #e0e3e6;
+  position: relative;
+  top: -20px;
+}
+.demo-i-circle-custom span i {
+  font-style: normal;
+  color: #3f414d;
+}
+
+.ivu-btn.ivu-btn-primary.ivu-btn-small:not(.ivu-btn-loading) {
+  padding: 2px 10px !important;
+}
+td.ivu-table-expanded-cell {
+  background-color: white !important;
+}
+</style>
+
+
+
