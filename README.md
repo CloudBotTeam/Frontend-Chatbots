@@ -4,7 +4,11 @@
 
 ```bash
 git clone https://github.com/CloudBotTeam/Frontend-Chatbots.git
+
 npm install
+# 如果报错可以尝试以下操作 但仍然不建议用cnpm
+npm install --registry=https://registry.npm.taobao.org
+
 npm run dev
 ```
 浏览器访问 http://localhost:9001
@@ -339,7 +343,6 @@ npm run dev
 | group_id  |  string  |      |    |
 | serv_list  |  object[]  |      |  item 类型: object  |
 | serv_id  |  string  |      |    |
-
 
 
 ## 补充
