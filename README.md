@@ -1,6 +1,8 @@
 # Frontend #
 
-## Running
+&nbsp;
+
+# Running
 
 ```bash
 git clone https://github.com/CloudBotTeam/Frontend-Chatbots.git
@@ -15,7 +17,10 @@ npm run dev
 
 
 
-## 目录结构
+&nbsp;
+
+# 目录结构
+
 ```shell
 ├── src                        // 源代码
 │   ├── api                    // Login请求
@@ -42,7 +47,11 @@ npm run dev
 
 
 
-## 进度
+
+
+&nbsp;
+
+# 进度
 
 - bot
 	- [x] 查看bot列表 `Get` '/robots'
@@ -70,14 +79,17 @@ npm run dev
 
 
 
-## 接口
-### 1. bot
+&nbsp;
+
+# 接口
+
+## 1. bot
 
 
 
-#### 1.1 获取所有 bot
+### 1.1 获取所有 bot
 
-##### 基本信息
+#### 基本信息
 
 **Path：** /robots
 
@@ -89,7 +101,7 @@ npm run dev
 
 &nbsp;
 
-##### 返回数据
+#### 返回数据
 
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
@@ -103,9 +115,9 @@ npm run dev
 
 &nbsp;
 
-#### 1.2 获取一个 bot 的基本信息和它管理的所有 group
+### 1.2 获取一个 bot 的基本信息和它管理的所有 group
 
-##### 基本信息
+#### 基本信息
 
 **Path：** /robots/{{bot_id}}
 
@@ -117,7 +129,7 @@ npm run dev
 
 &nbsp;
 
-##### 请求参数
+#### 请求参数
 
 **路径参数**
 
@@ -129,7 +141,7 @@ npm run dev
 
 &nbsp;
 
-##### 返回数据
+#### 返回数据
 
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
@@ -145,9 +157,9 @@ npm run dev
 
 &nbsp;
 
-#### 1.3 删除一个bot
+### 1.3 删除一个bot
 
-##### 基本信息
+#### 基本信息
 
 **Path：** /robots/{{bot_id}}
 
@@ -159,7 +171,7 @@ npm run dev
 
 &nbsp;
 
-##### 请求参数
+#### 请求参数
 
 **Headers**
 
@@ -178,9 +190,10 @@ npm run dev
 
 &nbsp;
 
-#### 1.4 删除一个 bot 下管理的某些 group
+### 1.4 删除一个 bot 下管理的某些 group
 
-##### 基本信息
+#### 基本信息
+
 **Path：** /robots/deletegroups/{{bot_id}}
 
 **Method：** DELETE
@@ -191,7 +204,7 @@ npm run dev
 
 &nbsp;
 
-##### 请求参数
+#### 请求参数
 
 **Headers**
 
@@ -211,11 +224,11 @@ npm run dev
 
 &nbsp;&nbsp;
 
-### 2. group
+## 2. group
 
-#### 2.1 获取所有 group
+### 2.1 获取所有 group
 
-##### 基本信息
+#### 基本信息
 
 **Path：** /groups
 
@@ -227,7 +240,7 @@ npm run dev
 
 &nbsp;
 
-##### 返回数据
+#### 返回数据
 
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
@@ -240,9 +253,9 @@ npm run dev
 
 &nbsp;
 
-#### 2.2 获取一个 group 的基本信息和它管理的所有 service
+### 2.2 获取一个 group 的基本信息和它管理的所有 service
 
-##### 基本信息
+### 基本信息
 
 **Path：** /groups/{{group_id}}
 
@@ -254,7 +267,7 @@ npm run dev
 
 &nbsp;
 
-##### 请求参数
+#### 请求参数
 
 **路径参数**
 
@@ -266,7 +279,7 @@ npm run dev
 
 &nbsp;
 
-##### 返回数据
+#### 返回数据
 
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
@@ -282,9 +295,9 @@ npm run dev
 
 &nbsp;
 
-#### 2.3 删除一个 group
+### 2.3 删除一个 group
 
-##### 基本信息
+#### 基本信息
 
 **Path：** /groups/{{group_id}}
 
@@ -296,7 +309,7 @@ npm run dev
 
 &nbsp;
 
-##### 请求参数
+#### 请求参数
 
 **Headers**
 
@@ -315,9 +328,10 @@ npm run dev
 
 &nbsp;
 
-#### 2.4 删除一个 group 下管理的某些 service
+### 2.4 删除一个 group 下管理的某些 service
 
-##### 基本信息
+#### 基本信息
+
 **Path：** /groups/deleteservs
 
 **Method：** DELETE
@@ -328,7 +342,7 @@ npm run dev
 
 &nbsp;
 
-##### 请求参数
+#### 请求参数
 
 **Headers**
 
@@ -345,9 +359,13 @@ npm run dev
 | serv_id  |  string  |      |    |
 
 
+
+&nbsp;
+
 ## 补充
 
 1. 用 mock.js 拦截了 ajax 请求并返回随机数据，接后端时把 mock 去掉即可；
 
 2. 目前登录也是用 mock 来验证用户名密码，如果要做登录的话去掉 mock 发后端验证用户名密码即可，如果不做的话就用目前的假登录也行；
 3. chatbot 和 group 页删除 bot 或 group 一次只能删一个，请求数据是 string （相应id）；botdetail 和 groupdetail 页删除 group 或 service 可以批量删，请求数据是 object[] （要删除的id列表）；都试了一下，最后用哪种都行；
+
