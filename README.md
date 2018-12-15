@@ -26,6 +26,10 @@ npm run dev
 │   ├── api                    // Login请求
 │   ├── components             // 全局UI组件
 │   ├── mock                   // mock随机数据
+│   │    ├── botdata.js        // bot相关数据的模拟
+│   │    ├── groupdata.js      // group相关数据的模拟
+│   │    ├── login.js          // login相关数据的模拟
+│   │    ├── index.js          // login路径匹配 引入了所有mock模块
 │   ├── router                 // 路由
 │   ├── store                  // 全局store管理
 │   ├── utils                  // 全局公用方法
