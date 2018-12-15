@@ -83,6 +83,8 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 返回数据
 
 | 参数名称 | 类型 | 默认值 | 备注 |
@@ -94,6 +96,8 @@ npm run dev
 | timestamp  |  string  |      |  先留着，可以删掉  |
 
 
+
+&nbsp;
 
 #### 1.2 获取一个 bot 的基本信息和它管理的所有 group
 
@@ -107,6 +111,8 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 请求参数
 
 **路径参数**
@@ -117,7 +123,10 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 返回数据
+
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | bot_name  |  string  |      |    |
@@ -129,6 +138,8 @@ npm run dev
 | group_type  |  string  |      |    |
 
 
+
+&nbsp;
 
 #### 1.3 删除一个bot
 
@@ -142,8 +153,12 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 请求参数
+
 **Headers**
+
 | 参数名称 | 参数值 | 示例 | 备注 |
 | -------- | ---- | ---- | ---- |
 | Content-Type  |  application/x-www-form-urlencoded  |      |      |
@@ -157,6 +172,8 @@ npm run dev
 
 
 
+&nbsp;
+
 #### 1.4 删除一个 bot 下管理的某些 group
 
 ##### 基本信息
@@ -168,7 +185,10 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 请求参数
+
 **Headers**
 
 | 参数名称 | 参数值 | 示例 | 备注 |
@@ -176,6 +196,7 @@ npm run dev
 | Content-Type  |  application/json  |      |      |
 
 **Body**
+
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | bot_id  |  string  |      |    |
@@ -184,7 +205,10 @@ npm run dev
 
 
 
+&nbsp;&nbsp;
+
 ### 2. group
+
 #### 2.1 获取所有 group
 
 ##### 基本信息
@@ -197,7 +221,10 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 返回数据
+
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | group_list  |  object []  |      |  item 类型: object  |
@@ -206,6 +233,8 @@ npm run dev
 | timestamp  |  string  |      |  先留着，可以删掉  |
 
 
+
+&nbsp;
 
 #### 2.2 获取一个 group 的基本信息和它管理的所有 service
 
@@ -219,6 +248,8 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 请求参数
 
 **路径参数**
@@ -229,7 +260,10 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 返回数据
+
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | group_name  |  string  |      |    |
@@ -241,6 +275,8 @@ npm run dev
 | serv_type  |  string  |      |    |
 
 
+
+&nbsp;
 
 #### 2.3 删除一个 group
 
@@ -254,8 +290,12 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 请求参数
+
 **Headers**
+
 | 参数名称 | 参数值 | 示例 | 备注 |
 | -------- | ---- | ---- | ---- |
 | Content-Type  |  application/x-www-form-urlencoded  |      |      |
@@ -269,6 +309,8 @@ npm run dev
 
 
 
+&nbsp;
+
 #### 2.4 删除一个 group 下管理的某些 service
 
 ##### 基本信息
@@ -280,14 +322,18 @@ npm run dev
 
 
 
+&nbsp;
+
 ##### 请求参数
 
 **Headers**
+
 | 参数名称 | 参数值 | 示例 | 备注 |
 | -------- | ---- | ---- | ---- |
 | Content-Type  |  application/json  |      |      |
 
 **Body**
+
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | group_id  |  string  |      |    |
