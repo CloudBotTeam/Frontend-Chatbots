@@ -216,7 +216,7 @@ export default {
           if (this.bot_list[i].bot_id > maxid) maxid = this.bot_list[i].bot_id;
 
         this.$router.push({
-          path: "/addbot",
+          path: "/createbot",
           query: {
             id: (parseInt(maxid) + 1).toString()
           }

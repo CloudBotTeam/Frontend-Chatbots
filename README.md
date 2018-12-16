@@ -39,11 +39,12 @@ npm run dev
 │   │    ├── errorPages        // 错误界面
 │   │    ├── Chatbot.vue       // bot列表 /chatbot
 │   │    ├── BotDetail.vue     // bot详情 /botdetail/{{bot_id}}
+│   │    ├── BotAddGroup.vue   // 在bot下添加group //botaddgroup?id={{bot_id}}
 │   │    ├── Group.vue         // group列表 /group
 │   │    ├── GroupDetail.vue   // group详情 /groupdetail/{{group_id}}
 │   │    ├── Service.vue       // service列表 /service
 │   │    ├── ServDetail.vue    // service详情 /servdetail/{{serv_id}}
-│   │    ├── AddBot.vue    	   // 添加bot /addbot?id={{bot_id}}
+│   │    ├── AddBot.vue        // 添加bot /addbot?id={{bot_id}}
 │   ├── App.vue                // 入口页面
 │   └── main.js                // 入口 加载组件 初始化等
 
@@ -64,7 +65,7 @@ npm run dev
 	- [x] 删除一个bot `Delete` '/robots/{{bot_id}}'
 	- [x] 删除一个bot下管理的某些group(可以多选批量删除) `Delete` '/robots/deletegroups'
 	- [x] 添加一个bot
-	- [ ] 添加一对bot和group的对应关系
+	- [x] 添加一些bot和group的对应关系
 	- [ ] 删除所有bot
 
 - group
@@ -73,7 +74,7 @@ npm run dev
 	- [x] 删除一个group `Delete` '/groups/{{group_id}}'
 	- [x] 删除一个group下管理的某些service(可以多选批量删除) `Delete` '/groups/deleteservs'
 	- [ ] 添加一个group
-	- [ ] 添加一对（或一组）group和service的对应关系
+	- [ ] 添加一些group和service的对应关系
 	- [ ] group管理的service分类显示
 	- [ ] 删除所有group
 
@@ -262,6 +263,39 @@ npm run dev
 | group_id  |  string  |      |  非必要  |    |
 
 
+&nbsp;
+
+### 1.6 在一个 bot 下添加一些 group
+
+#### 基本信息
+
+**Path：** /robots/addgroups
+
+**Method：** POST
+
+**接口描述：**
+
+
+
+&nbsp;
+
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/json  |      |      |
+
+**Body**
+
+| 参数名称 | 类型 | 默认值 | 备注 |
+| -------- | ---- | ---- | ---- |
+| bot_id  |  string  |      |    |
+| add_groups |  object[]  |      |  item 类型: object  |
+| group_id  |  string  |      |    |
+
+
 
 
 &nbsp;&nbsp;
@@ -407,6 +441,6 @@ npm run dev
 ## 补充
 
 1. 用 mock.js 拦截了 ajax 请求并返回随机数据，接后端时把 mock 去掉即可；
-
 2. 目前登录也是用 mock 来验证用户名密码，如果要做登录的话去掉 mock 发后端验证用户名密码即可，如果不做的话就用目前的假登录也行；
 3. chatbot 和 group 页删除 bot 或 group 一次只能删一个，请求数据是 string （要删除的id）；botdetail 和 groupdetail 页删除 group 或 service 可以批量删，请求数据是 object[] （要删除的id列表）；都试了一下，最后用哪种都行；
+4. 尽可能的在响应式了，但还是不太理想，不管了...

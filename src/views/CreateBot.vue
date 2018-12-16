@@ -15,13 +15,7 @@
             </FormItem>
 
             <FormItem label="选择群">
-                <Table border ref="selection" :columns="columns7" :data="page_group_list" @on-selection-change="selectGroup"></Table>
-                <Page
-                    :total="this.group_list.length"
-                    show-total
-                    @on-change="setInitPage"
-                    style="text-align:right;margin-top:50px"
-                ></Page>
+                <Table border ref="selection" :columns="columns7" :data="group_list" @on-selection-change="selectGroup"></Table>
             </FormItem>
             
         
@@ -43,9 +37,8 @@ export default {
                 radio: 'QQ',
                 checkbox: [],
             },
+
             group_list:[],
-            pageindex: 1,
-            page_group_list: [],
 
             managed_groups: [],
             bot_type: [],
@@ -104,7 +97,7 @@ export default {
                                             this.$router.push({
                                                 path:
                                                 "groupdetail/" + 
-                                                this.group_list[(this.pageindex - 1) * 10 + params.index].group_id
+                                                this.group_list[params.index].group_id
                                             });
                                         }
                                     }
@@ -119,17 +112,6 @@ export default {
         }
     },
     methods: {
-        
-        setInitPage(page) {
-            this.page_group_list = [];
-            this.pageindex = page;
-            let group_list = this.group_list;
-            for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
-                if (i < group_list.length) {
-                    this.page_group_list.push(this.group_list[i]);
-                }
-            }
-        },
         getGroupdata(){
             this.$http.get('/groups') //使用axios发送请求
             .then((res)=>{ //连接成功后回调函数
@@ -199,8 +181,6 @@ export default {
         },
     },
     mounted() {
-        this.setInitPage(1);
-
         this.getGroupdata();
     }
 };

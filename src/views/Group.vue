@@ -24,22 +24,15 @@
 </template>
 
 <script>
-var vue;
-
 export default {
     name: "buttons",
     data() {
         return {
-            progresshow: false,
-            progresscount: 0,
-            progresstatus: "active",
-            progressspeed: 0,
-            group_list:[],
+          group_list:[],
     
           pageindex: 1,
           page_group_list: [],
-          lodding: false,
-          list_loadding: false,
+
           columns7: [
             {
               title: "群名称",
@@ -174,65 +167,8 @@ export default {
       }
   },
   mounted() {
-    const vue = this;
-    this.list_loadding = true;
-    setTimeout(function() {
-      vue.list_loadding = false;
-    }, 2000);
     this.setInitPage(1);
-
     this.getGroupdata();
   }
 };
 </script>
-
-
-<style type="text/css" scoped>
-.ivu-tag-dot {
-  border: none !important;
-}
-tr.ivu-table-row-hover td .ivu-tag-dot {
-  background-color: #ebf7ff !important;
-}
-
-.demo-i-circle-custom h1 {
-  color: #3f414d;
-  font-size: 10px;
-  font-weight: normal;
-}
-.demo-i-circle-custom p {
-  color: #657180;
-  font-size: 8px;
-  margin: 5px 0 2px;
-}
-.demo-i-circle-custom span {
-  display: block;
-  padding-top: 15px;
-  color: #657180;
-  font-size: 10px;
-}
-.demo-i-circle-custom span :before {
-  content: "";
-  display: block;
-  width: 50px;
-  height: 1px;
-  margin: 0 auto;
-  background: #e0e3e6;
-  position: relative;
-  top: -20px;
-}
-.demo-i-circle-custom span i {
-  font-style: normal;
-  color: #3f414d;
-}
-
-.ivu-btn.ivu-btn-primary.ivu-btn-small:not(.ivu-btn-loading) {
-  padding: 2px 10px !important;
-}
-td.ivu-table-expanded-cell {
-  background-color: white !important;
-}
-</style>
-
-
-

@@ -21,7 +21,6 @@ export default {
   },
   methods: {
     isLast (index) {
-
       return index === this.list.length - 1
     },
     showName (item) {

@@ -57,6 +57,11 @@ const CreateBot = function(opt){
                 'BotName:', data.data.bot_name, 'Groups:', data.data.managed_groups);
 }
 
+const AddGroups = function(opt){
+    let data = JSON.parse(opt.body);
+    console.log('BotID:', data.data.bot_id, 'Groups:', data.data.add_groups);
+}
+
 // 请求包含 '/robots' 字段的接口，会被拦截到该随机数据格式
 Mock.mock('/robots', 'get', BotData);
 
@@ -74,3 +79,6 @@ Mock.mock(RegExp('/robots' + ".*"), "delete", DeleteBot);
 
 // '/robots' 添加一个bot
 Mock.mock('/robots', "post", CreateBot);
+
+// '/robots/addgroups' 在某个bot下添加一些group
+Mock.mock('/robots/addgroups', 'post', AddGroups);

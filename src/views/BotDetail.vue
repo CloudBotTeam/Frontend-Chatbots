@@ -27,7 +27,7 @@
             </Col>
         </Row>
 
-        <Button type="primary" size="large" icon="android-add-circle" style="padding-bottom:5px;">添加群</Button>
+        <Button type="primary" size="large" icon="android-add-circle" style="padding-bottom:5px;" @click="jumpadd">添加群</Button>
         <Button type="primary" size="large" icon="android-remove-circle" style="padding-bottom:5px;" @click="remove">删除所选群</Button>    
     </div>
 
@@ -215,39 +215,16 @@
                 this.delet_groups = arr;
                 console.log(this.delet_groups)
             },
+
+            jumpadd() {
+                this.$router.push({
+                    path: "/botaddgroup",
+                    query: {
+                        id: this.bot_id,
+                    }
+                })      
+            },
         },
        
     }
 </script>
-
-<style type="text/css">
-        .demo-i-circle-custom h1{
-            color: #3f414d;
-            font-size: 10px;
-            font-weight: normal;
-        }
-        .demo-i-circle-custom p{
-            color: #657180;
-            font-size: 8px;
-            margin: 5px 0 2px;
-        }
-        .demo-i-circle-custom span{
-            display: block;
-            padding-top: 15px;
-            color: #657180;
-            font-size: 10px;}
-           .demo-i-circle-custom span :before{
-                content: '';
-                display: block;
-                width: 50px;
-                height: 1px;
-                margin: 0 auto;
-                background: #e0e3e6;
-                position: relative;
-                top: -20px;
-            };
-        .demo-i-circle-custom span i{
-            font-style: normal;
-            color: #3f414d;
-        }
-</style>
