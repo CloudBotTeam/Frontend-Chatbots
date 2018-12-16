@@ -66,7 +66,7 @@ npm run dev
 	- [x] 删除一个bot下管理的某些group(可以多选批量删除) `Delete` '/robots/deletegroups'
 	- [x] 添加一个bot
 	- [x] 添加一些bot和group的对应关系
-	- [ ] 删除所有bot
+	- [x] 删除所有bot
 
 - group
 	- [x] 查看group列表 `Get` '/groups'
@@ -294,6 +294,30 @@ npm run dev
 | bot_id  |  string  |      |    |
 | add_groups |  object[]  |      |  item 类型: object  |
 | group_id  |  string  |      |    |
+
+
+
+&nbsp;
+### 1.7 删除所有 bot
+
+#### 基本信息
+
+**Path：** /robots
+
+**Method：** DELETE
+
+**接口描述：**
+
+
+
+&nbsp;
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/x-www-form-urlencoded  |      |      |
 
 
 

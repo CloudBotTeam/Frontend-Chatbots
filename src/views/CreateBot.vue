@@ -15,7 +15,8 @@
             </FormItem>
 
             <FormItem label="选择群">
-                <Table border ref="selection" :columns="columns7" :data="group_list" @on-selection-change="selectGroup"></Table>
+                <Table border ref="selection" :columns="columns7" :data="group_list" 
+                    @on-selection-change="selectGroup" height="550"></Table>
             </FormItem>
             
         

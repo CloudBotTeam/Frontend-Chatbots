@@ -46,6 +46,10 @@ const DeleteBot = function(opt){
     console.log('DeleteBotID', id);
 }
 
+const DeleteAllBot = function(){
+    console.log("delete all bots");
+}
+
 const DeleteGroups = function(opt){
     let data = JSON.parse(opt.body);
     console.log('BotID', data.bot_id, 'DeleteGroupID', data.delet_groups);
@@ -73,6 +77,9 @@ Mock.mock(RegExp('/robots' + ".*"), "get", (opt) =>{
 
 // '/robots/deletegroups' 删除某个bot下的一些group
 Mock.mock('/robots/deletegroups', 'delete', DeleteGroups);
+
+// '/robots' 删除所有bot
+Mock.mock('/robots', "delete", DeleteAllBot);
 
 // '/robots/{{bot_id}}' 删除某个bot
 Mock.mock(RegExp('/robots' + ".*"), "delete", DeleteBot);

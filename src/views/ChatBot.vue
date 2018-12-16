@@ -22,14 +22,15 @@ b<template>
 
     <Button type="primary" size="large" icon="android-add-circle" 
             style="padding-bottom:5px; margin-top: 10px" @click="jumpadd">创建机器人</Button>
+    
+    <Poptip confirm title="确定要删除所有机器人吗？" @on-ok="deleteOk">
+        <Button type="error" size="large" icon="android-remove-circle" 
+                style="padding-bottom:5px; margin-top: 10px">删除所有机器人</Button>
+    </Poptip>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-var vue;
-var uploader;
-
 export default {
     name: "buttons",
     data() {
@@ -249,69 +250,32 @@ export default {
               }
             }
           });
-      }
+      },
+      // 确认删除所有bot
+      deleteOk(){
+        //delete请求
+        this.$http.delete('/robots',{
+          headers: {"Content-Type": "application/x-www-form-urlencoded"}
+        })
+        .then((response) => {
+          this.$Message.success('已删除所有机器人');
+          console.log(response);  
+        })
+        .catch((err) => {
+          console.log("Chatbot delete '/robots' 请求错误：", err);
+        })
+        
+        //删除前端数据
+        this.bot_list = [];
+
+        //更新page组件视图
+        this.page_bot_list = [];
+      },
     },
 
     mounted() {
-      const vue = this;
-      this.list_loadding = true;
-      setTimeout(function() {
-        vue.list_loadding = false;
-      }, 2000);
       this.setInitPage(1);
-
       this.getBotdata();
     }
 };
 </script>
-
-
-<style type="text/css" scoped>
-.ivu-tag-dot {
-  border: none !important;
-}
-tr.ivu-table-row-hover td .ivu-tag-dot {
-  background-color: #ebf7ff !important;
-}
-
-.demo-i-circle-custom h1 {
-  color: #3f414d;
-  font-size: 10px;
-  font-weight: normal;
-}
-.demo-i-circle-custom p {
-  color: #657180;
-  font-size: 8px;
-  margin: 5px 0 2px;
-}
-.demo-i-circle-custom span {
-  display: block;
-  padding-top: 15px;
-  color: #657180;
-  font-size: 10px;
-}
-.demo-i-circle-custom span :before {
-  content: "";
-  display: block;
-  width: 50px;
-  height: 1px;
-  margin: 0 auto;
-  background: #e0e3e6;
-  position: relative;
-  top: -20px;
-}
-.demo-i-circle-custom span i {
-  font-style: normal;
-  color: #3f414d;
-}
-
-.ivu-btn.ivu-btn-primary.ivu-btn-small:not(.ivu-btn-loading) {
-  padding: 2px 10px !important;
-}
-td.ivu-table-expanded-cell {
-  background-color: white !important;
-}
-</style>
-
-
-
