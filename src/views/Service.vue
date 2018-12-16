@@ -33,8 +33,7 @@
                 </Collapse>
             </Col>
 
-            <Button type="primary" size="large" icon="android-add-circle" 
-            id='pickfiles' style="padding-bottom:5px; margin-top: 10px">自定义Service组</Button>
+            <Button type="primary" size="large" icon="android-add-circle" style="padding-bottom:5px; margin-top: 10px">自定义Service组</Button>
         </Row> 
     </div>
 </template>

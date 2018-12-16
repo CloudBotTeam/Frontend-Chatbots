@@ -46,12 +46,13 @@ export const asyncRouterMap = [
     children: [
       { path: '/chatbot', name: 'Chatbot', icon: "android-desktop", component: _import('ChatBot') },
       { path: '/botdetail/:id', name: 'BotDetail', hidden: true, component: _import('BotDetail') },
-      { path: '/servdetail/:id', name: 'ServDetail', hidden: true, component: _import('ServDetail') },
+      { path: '/addbot', name: 'AddBot', hidden: true, component: _import('AddBot') },
 
       { path: '/group', name: 'Group', icon: "android-contacts", component: _import('Group') },
       { path: '/groupdetail/:id', name: 'GroupDetail', hidden: true, component: _import('GroupDetail') },
       
       { path: '/service', name: 'Service', icon: "ios-paperplane", component: _import('Service') },
+      { path: '/servdetail/:id', name: 'ServDetail', hidden: true, component: _import('ServDetail') },
     ]
   },
   { path: '*', redirect: '/pages/404', hidden: true }

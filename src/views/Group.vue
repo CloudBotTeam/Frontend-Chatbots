@@ -25,7 +25,6 @@
 
 <script>
 var vue;
-var uploader;
 
 export default {
     name: "buttons",

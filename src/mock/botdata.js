@@ -51,17 +51,26 @@ const DeleteGroups = function(opt){
     console.log('BotID', data.bot_id, 'DeleteGroupID', data.delet_groups);
 }
 
+const CreateBot = function(opt){
+    let data = JSON.parse(opt.body);
+    console.log('BotID:', data.data.bot_id, 'BotType:', data.data.bot_type,
+                'BotName:', data.data.bot_name, 'Groups:', data.data.managed_groups);
+}
+
 // 请求包含 '/robots' 字段的接口，会被拦截到该随机数据格式
 Mock.mock('/robots', 'get', BotData);
 
-// '/robots/{{bot_id}}'
+// '/robots/{{bot_id}}' 某个bot的详细信息
 Mock.mock(RegExp('/robots' + ".*"), "get", (opt) =>{
     const id = opt.url.substr(opt.url.length-5,5);
     return Mock.mock(BotDetail(id));
 });
 
-// '/robots/deletegroups'
+// '/robots/deletegroups' 删除某个bot下的一些group
 Mock.mock('/robots/deletegroups', 'delete', DeleteGroups);
 
-// '/robots/{{bot_id}}'
+// '/robots/{{bot_id}}' 删除某个bot
 Mock.mock(RegExp('/robots' + ".*"), "delete", DeleteBot);
+
+// '/robots' 添加一个bot
+Mock.mock('/robots', "post", CreateBot);

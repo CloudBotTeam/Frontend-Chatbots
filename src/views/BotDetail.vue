@@ -11,7 +11,7 @@
                 <Card>
                     <Col span="6"><h6>机器人名称: {{bot_name}}</h6></Col> 
                     <Col span="6"><h6>机器人id: {{bot_id}}</h6></Col> 
-                    <Col span="6"><h6>类型: {{type}}</h6></Col>  
+                    <Col span="6"><h6>类型: {{bot_type}}</h6></Col>  
                     <Col span="6"><h6>创建时间: {{bot_create_timestamp}}</h6></Col> 
                     <br>
                 </Card>
@@ -27,10 +27,8 @@
             </Col>
         </Row>
 
-        <Button type="primary" size="large" icon="android-add-circle" 
-            id='pickfiles' style="padding-bottom:5px;">添加群</Button>
-        <Button type="primary" size="large" icon="android-remove-circle" 
-            id='pickfiles' style="padding-bottom:5px;" @click="remove">删除所选群</Button>    
+        <Button type="primary" size="large" icon="android-add-circle" style="padding-bottom:5px;">添加群</Button>
+        <Button type="primary" size="large" icon="android-remove-circle" style="padding-bottom:5px;" @click="remove">删除所选群</Button>    
     </div>
 
 </template>
@@ -49,7 +47,7 @@
         data () {
             return {
                 json_list:[],
-                type:'',
+                bot_type:'',
                 bot_id:this.$route.params.id,
                 bot_create_timestamp:'',
                 bot_name:'',
@@ -169,7 +167,7 @@
                         //name
                         this.bot_name = res.data.data.bot_name;
                         //type
-                        this.type = res.data.data.bot_type;
+                        this.bot_type = res.data.data.bot_type;
                         //time
                         this.bot_create_timestamp = res.data.data.timestamp;
                         //managed_groups
@@ -199,7 +197,7 @@
                     console.log(response);
                 })
                 .catch((err) => {
-                    console.log('Botdetail delete请求错误：', err);
+                    console.log('Botdetail delete 请求错误：', err);
                 })
                 
                 //删除前端数据

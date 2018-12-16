@@ -112,7 +112,7 @@ npm run dev
 | bot_list  |  object []  |      |  item 类型: object  |
 | bot_name  |  string  |      |    |
 | bot_type  |  string  |      |    |
-| status  |  integer  |      |  目前是int，可以改成string  |
+| status  |  integer  |      |  目前是int（0/1/2），可以改成string（'未启动'/'运行中'/'故障'）  |
 | timestamp  |  string  |      |  先留着，可以删掉  |
 
 
@@ -371,4 +371,4 @@ npm run dev
 1. 用 mock.js 拦截了 ajax 请求并返回随机数据，接后端时把 mock 去掉即可；
 
 2. 目前登录也是用 mock 来验证用户名密码，如果要做登录的话去掉 mock 发后端验证用户名密码即可，如果不做的话就用目前的假登录也行；
-3. chatbot 和 group 页删除 bot 或 group 一次只能删一个，请求数据是 string （相应id）；botdetail 和 groupdetail 页删除 group 或 service 可以批量删，请求数据是 object[] （要删除的id列表）；都试了一下，最后用哪种都行；
+3. chatbot 和 group 页删除 bot 或 group 一次只能删一个，请求数据是 string （要删除的id）；botdetail 和 groupdetail 页删除 group 或 service 可以批量删，请求数据是 object[] （要删除的id列表）；都试了一下，最后用哪种都行；

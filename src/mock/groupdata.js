@@ -14,7 +14,6 @@ const GroupData = function(){
         }
         GroupList.push(Group)
     }
-    //console.log(GroupList[2].group_name);
     return{
         data:GroupList
     }

@@ -19,6 +19,9 @@ b<template>
         ></Page>
       </Col>
     </Row>
+
+    <Button type="primary" size="large" icon="android-add-circle" 
+            style="padding-bottom:5px; margin-top: 10px" @click="jumpadd">创建机器人</Button>
   </div>
 </template>
 
@@ -205,6 +208,19 @@ export default {
             this.page_bot_list.push(this.bot_list[i]);
           }
         }
+      },
+
+      jumpadd() {
+        var maxid = '';
+        for (let i = 0; i < this.bot_list.length; i++) 
+          if (this.bot_list[i].bot_id > maxid) maxid = this.bot_list[i].bot_id;
+
+        this.$router.push({
+          path: "/addbot",
+          query: {
+            id: (parseInt(maxid) + 1).toString()
+          }
+        })      
       },
 
       setInitPage(page) {
