@@ -150,7 +150,10 @@ export default {
             });
         },
         selectGroup(selected_groups) {
-            this.managed_groups = selected_groups;
+            var group_list = [];
+            for(let i=0; i<selected_groups.length; i++)
+                group_list.push(selected_groups[i].group_id);
+            this.managed_groups = group_list;
             console.log(this.managed_groups);
         },
         selectType(selected_type) {

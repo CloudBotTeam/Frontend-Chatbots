@@ -43,6 +43,7 @@ npm run dev
 │   │    ├── GroupDetail.vue   // group详情 /groupdetail/{{group_id}}
 │   │    ├── Service.vue       // service列表 /service
 │   │    ├── ServDetail.vue    // service详情 /servdetail/{{serv_id}}
+│   │    ├── AddBot.vue    	   // 添加bot /addbot?id={{bot_id}}
 │   ├── App.vue                // 入口页面
 │   └── main.js                // 入口 加载组件 初始化等
 
@@ -62,7 +63,7 @@ npm run dev
 	- [x] 查看某个bot的信息和它管理的所有group `Get` '/robots/{{bot_id}}'
 	- [x] 删除一个bot `Delete` '/robots/{{bot_id}}'
 	- [x] 删除一个bot下管理的某些group(可以多选批量删除) `Delete` '/robots/deletegroups'
-	- [ ] 添加一个bot
+	- [x] 添加一个bot
 	- [ ] 添加一对bot和group的对应关系
 	- [ ] 删除所有bot
 
@@ -223,6 +224,43 @@ npm run dev
 | bot_id  |  string  |      |    |
 | delet_groups |  object[]  |      |  item 类型: object  |
 | group_id  |  string  |      |    |
+
+
+
+&nbsp;
+
+### 1.5 添加一个 bot
+
+#### 基本信息
+
+**Path：** /robots
+
+**Method：** POST
+
+**接口描述：**
+
+
+
+&nbsp;
+
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/json  |      |      |
+
+**Body**
+
+| 参数名称 | 类型 | 默认值 |	是否必要 | 备注 |
+| -------- | ---- | ---- | ---- | ---- |
+| bot_id  |  string  |      |    |    |
+| bot_name  |  string  |      |    |    |
+| bot_type  |  string  |      |    |    |
+| managed_groups |  object[]  |    |   非必要   |  item 类型: object  |
+| group_id  |  string  |      |  非必要  |    |
+
 
 
 
