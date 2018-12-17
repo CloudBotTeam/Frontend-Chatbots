@@ -42,8 +42,8 @@ export default {
             group_list:[],
 
             managed_groups: [],
-            bot_type: [],
-            bot_name: [],
+            bot_type: '',
+            bot_name: '',
             bot_id: '', 
 
             columns7: [

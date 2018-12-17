@@ -54,6 +54,7 @@ export const asyncRouterMap = [
       
       { path: '/service', name: 'Service', icon: "ios-paperplane", component: _import('Service') },
       { path: '/servdetail/:id', name: 'ServDetail', hidden: true, component: _import('ServDetail') },
+      { path: '/createservlist', name: 'CreateServList', hidden: true, component: _import('CreateServList') },
     ]
   },
   { path: '*', redirect: '/pages/404', hidden: true }

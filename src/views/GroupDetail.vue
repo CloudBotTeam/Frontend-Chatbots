@@ -18,7 +18,7 @@
 
                 <br><br>
                 <div style="" class="doc-header">
-                    <h1>Service List</h1>
+                    <h1>管理的Service</h1>
                 </div>
                 <br>
 
@@ -105,7 +105,7 @@
                                             click: () => {
                                             this.$router.push({
                                                 path:
-                                                "/servdetail/" + params.index
+                                                "/servdetail/" + this.managed_servs[params.index].serv_id
                                             });
                                             }
                                         },
@@ -129,9 +129,6 @@
             this.getGroupInfo();
         },
         methods:{
-            handleSelectAll(status) {
-                this.$refs.selection.selectAll(status);
-            },
             getGroupInfo(){
                 this.$http.get('/groups' + this.group_id) //使用axios发送请求
                 .then((res)=>{ //连接成功后回调函数

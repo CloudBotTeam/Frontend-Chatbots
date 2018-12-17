@@ -60,28 +60,29 @@ npm run dev
 # 进度
 
 - bot
-	- [x] 查看bot列表 `Get` '/robots'
-	- [x] 查看某个bot的信息和它管理的所有group `Get` '/robots/{{bot_id}}'
-	- [x] 删除一个bot `Delete` '/robots/{{bot_id}}'
-	- [x] 删除一个bot下管理的某些group(可以多选批量删除) `Delete` '/robots/deletegroups'
-	- [x] 添加一个bot
-	- [x] 添加一些bot和group的对应关系
-	- [x] 删除所有bot
+  - [x] 查看bot列表 `Get` '/robots'
+  - [x] 查看某个bot的信息和它管理的所有group `Get` '/robots/{{bot_id}}'
+  - [x] 删除一个bot `Delete` '/robots/{{bot_id}}'
+  - [x] 删除一个bot下管理的某些group(可以多选批量删除) `Delete` '/robots/deletegroups'
+  - [x] 添加一个bot
+  - [x] 添加一些bot和group的对应关系
+  - [x] 删除所有bot
 
 - group
-	- [x] 查看group列表 `Get` '/groups'
-	- [x] 查看某个group的信息和它管理的所有service `Get` '/groups/{{group_id}}'
-	- [x] 删除一个group `Delete` '/groups/{{group_id}}'
-	- [x] 删除一个group下管理的某些service(可以多选批量删除) `Delete` '/groups/deleteservs'
-	- [ ] 添加一个group
-	- [ ] 添加一些group和service的对应关系
-	- [ ] group管理的service分类显示
-	- [ ] 删除所有group
+  - [x] 查看group列表 `Get` '/groups'
+  - [x] 查看某个group的信息和它管理的所有service `Get` '/groups/{{group_id}}'
+  - [x] 删除一个group `Delete` '/groups/{{group_id}}'
+  - [x] 删除一个group下管理的某些service(可以多选批量删除) `Delete` '/groups/deleteservs'
+  - [ ] 添加一个group
+  - [ ] 添加一些group和service的对应关系
+  - [ ] group管理的service分类显示
+  - [ ] 删除所有group
 
 - service
-	- [x] 查看service列表 目前在前端写死 (是前端写死比较好还是后端返回数据比较好？
-	- [x] 查看某个service的信息 目前在前端写死
-	- [ ] 添加一个自定义service组
+  - [x] 查看service列表
+  - [x] 查看某个service的详细信息
+  - [x] 添加一个自定义service组
+  - [ ] 删除一个service组
 
 
 
@@ -112,10 +113,10 @@ npm run dev
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | bot_list  |  object []  |      |  item 类型: object  |
-| bot_name  |  string  |      |    |
-| bot_type  |  string  |      |    |
-| status  |  integer  |      |  目前是int（0/1/2），可以改成string（'未启动'/'运行中'/'故障'）  |
-| timestamp  |  string  |      |  先留着，可以删掉  |
+| ├─ bot_name |  string  |      |    |
+| ├─ bot_type |  string  |      |    |
+| ├─ status |  integer  |      |  目前是int（0/1/2），可以改成string（'未启动'/'运行中'/'故障'）  |
+| ├─ timestamp |  string  |      |  先留着，可以删掉  |
 
 
 
@@ -155,9 +156,9 @@ npm run dev
 | bot_type  |  string  |      |    |
 | timestamp  |  string  |      |  先留着，可以删掉  |
 | group_list  |  object[]  |      |  item 类型: object  |
-| group_id  |  string  |      |    |
-| group_name  |  string  |      |    |
-| group_type  |  string  |      |    |
+| ├─ group_id |  string  |      |    |
+| ├─ group_name |  string  |      |    |
+| ├─ group_type |  string  |      |    |
 
 
 
@@ -224,7 +225,7 @@ npm run dev
 | -------- | ---- | ---- | ---- |
 | bot_id  |  string  |      |    |
 | delet_groups |  object[]  |      |  item 类型: object  |
-| group_id  |  string  |      |    |
+| ├─ group_id |  string  |      |    |
 
 
 
@@ -260,7 +261,7 @@ npm run dev
 | bot_name  |  string  |      |    |    |
 | bot_type  |  string  |      |    |    |
 | managed_groups |  object[]  |    |   非必要   |  item 类型: object  |
-| group_id  |  string  |      |  非必要  |    |
+| ├─ group_id |  string  |      |  非必要  |    |
 
 
 &nbsp;
@@ -293,7 +294,7 @@ npm run dev
 | -------- | ---- | ---- | ---- |
 | bot_id  |  string  |      |    |
 | add_groups |  object[]  |      |  item 类型: object  |
-| group_id  |  string  |      |    |
+| ├─ group_id |  string  |      |    |
 
 
 
@@ -345,9 +346,9 @@ npm run dev
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | group_list  |  object []  |      |  item 类型: object  |
-| group_name  |  string  |      |    |
-| group_type  |  string  |      |    |
-| timestamp  |  string  |      |  先留着，可以删掉  |
+| ├─ group_name |  string  |      |    |
+| ├─ group_type |  string  |      |    |
+| ├─ timestamp |  string  |      |  先留着，可以删掉  |
 
 
 
@@ -387,9 +388,9 @@ npm run dev
 | group_type  |  string  |      |    |
 | timestamp  |  string  |      |  先留着，可以删掉  |
 | serv_list  |  object[]  |      |  item 类型: object  |
-| serv_id  |  string  |      |    |
-| serv_name  |  string  |      |    |
-| serv_type  |  string  |      |    |
+| ├─ serv_id |  string  |      |    |
+| ├─ serv_name |  string  |      |    |
+| ├─ serv_type |  string  |      |    |
 
 
 
@@ -456,12 +457,116 @@ npm run dev
 | -------- | ---- | ---- | ---- |
 | group_id  |  string  |      |    |
 | delet_servs |  object[]  |      |  item 类型: object  |
-| serv_id  |  string  |      |    |
+| ├─ serv_id |  string  |      |    |
+
+
+
+&nbsp;&nbsp;
+## 3. service
+
+### 3.1 获取所有 service
+
+#### 基本信息
+
+**Path：** /services
+
+**Method：** GET
+
+**接口描述：**
 
 
 
 &nbsp;
 
+#### 返回数据
+
+| 参数名称 | 类型 | 默认值 | 备注 |
+| -------- | ---- | ---- | ---- |
+| data_serv  |  object []  |      |  item 类型: object  |
+| ├─ type |  string  |      |  该分类的名称  |
+| ├─ servlist |  object []  |      |  该分类下的service列表  |
+| │    ├── serv_id |  string  |      |  该service的id  |
+| │    ├── serv_type |  string  |      |  该service的分类  |
+| │    ├── serv_name |  string  |      |  该service的名称  |
+
+
+
+&nbsp;
+### 3.2 添加一个 service 组
+
+#### 基本信息
+
+**Path：** /services
+
+**Method：** POST
+
+**接口描述：**
+
+
+
+&nbsp;
+
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/json  |      |      |
+
+**Body**
+
+| 参数名称 | 类型 | 默认值 | 备注 |
+| -------- | ---- | ---- | ---- |
+| id  |  string  |      |  service组id  |
+| type  |  string  |      |  service组名称  |
+| add_servs |  object[]  |    |  添加的service列表  item 类型: object  |
+| ├─ serv_id |  string  |      |  添加的service的id  |
+
+
+
+&nbsp;
+
+### 3.3 获取一个 service 的信息
+
+#### 基本信息
+
+**Path：** /services/{{serv_id}}
+
+**Method：** GET
+
+**接口描述：**
+
+
+
+&nbsp;
+
+#### 请求参数
+
+**路径参数**
+
+| 参数名称 | 示例 | 备注 |
+| -------- | ---- | ---- |
+| serv_id  |      |      |
+
+
+
+&nbsp;
+
+#### 返回数据
+
+| 参数名称 | 类型 | 默认值 | 备注 |
+| -------- | ---- | ---- | ---- |
+| serv_name  |  string  |      |    |
+| serv_type  |  string  |      |    |
+| serv_description  |  object[]  |      |  item 类型: object  |
+
+
+
+
+
+
+&nbsp;&nbsp;
 ## 补充
 
 1. 用 mock.js 拦截了 ajax 请求并返回随机数据，接后端时把 mock 去掉即可；

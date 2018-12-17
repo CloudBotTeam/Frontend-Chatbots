@@ -22,17 +22,17 @@ const BotData = function(){
 const BotDetail = function(id){
     var grouplist = [];
     for (let i = 0; i <= 5; i++) {
-        grouplist.push({ // 根据数据模板生成模拟数据
-            group_name: Mock.Random.last(), // 随机生成机器人名字
-            group_id: (20000+i).toString(), // 随机生成机器人id
-            timestamp: Mock.Random.datetime(), // 随机生成创建时间
+        grouplist.push({
+            group_name: Mock.Random.last(),
+            group_id: (20000+i).toString(),
+            timestamp: Mock.Random.datetime(),
             group_type: Type[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         })
     }
 
     let BotInfo = {
-        bot_name: Mock.Random.last(), // 随机生成机器人名字
-        timestamp: Mock.Random.datetime(), // 随机生成创建时间
+        bot_name: Mock.Random.last(),
+        timestamp: Mock.Random.datetime(),
         bot_type: Type[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         managed_groups:grouplist,
     }

@@ -7,8 +7,8 @@ const GroupData = function(){
     let GroupList = []; // 定义需要的数据
     for (let i = 0; i <= 25; i++) {
         let Group = { // 根据数据模板生成模拟数据
-            group_name: Mock.Random.last(), // 随机生成机器人名字
-            group_id: (20000+i).toString(), // 随机生成机器人id
+            group_name: Mock.Random.last(), // 随机生成群名字
+            group_id: (20000+i).toString(), // 随机生成群id
             timestamp: Mock.Random.datetime(), // 随机生成创建时间
             group_type: groupType[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         }
@@ -22,7 +22,7 @@ const GroupData = function(){
 const GroupDetail = function(id){
     var servlist = [];
     for (let i = 0; i <= 5; i++) {
-        servlist.push({ // 根据数据模板生成模拟数据
+        servlist.push({
             serv_name: Mock.Random.last(), // 随机生成service名字
             serv_id: (20000+i).toString(), // 随机生成service_id
             serv_type: servType[Mock.Random.integer(0, 2)], // 随机生成类型
@@ -30,8 +30,8 @@ const GroupDetail = function(id){
     }
     
     let GroupInfo = {
-        group_name: Mock.Random.last(), // 随机生成机器人名字
-        timestamp: Mock.Random.datetime(), // 随机生成创建时间
+        group_name: Mock.Random.last(),
+        timestamp: Mock.Random.datetime(),
         group_type: groupType[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         managed_servs:servlist,
     }

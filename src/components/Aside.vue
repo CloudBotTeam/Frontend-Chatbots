@@ -20,7 +20,7 @@
     <div class="text-uppercase mb-1 mt-2"><small><b>故障</b></small></div>
       <Progress :percent="fault_percent" :stroke-width="7" status="wrong" hide-info></Progress>
     <small class="text-muted">{{fault_bots}} / {{total_bots}}</small>
-
+    
   </aside>
 </template>
 

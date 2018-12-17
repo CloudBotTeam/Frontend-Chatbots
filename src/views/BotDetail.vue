@@ -18,7 +18,7 @@
 
                 <br><br>
                 <div style="" class="doc-header">
-                    <h1>Group List</h1>
+                    <h1>管理的群</h1>
                 </div>
                 <br>
                 
@@ -156,9 +156,6 @@
             this.getBotInfo();
         },
         methods:{
-            handleSelectAll (status) {
-                this.$refs.selection.selectAll(status);
-            },
 
             getBotInfo(){
                 this.$http.get('/robots/:' + this.bot_id) //使用axios发送请求
