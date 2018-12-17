@@ -23,7 +23,7 @@ b<template>
     <Button type="primary" size="large" icon="android-add-circle" 
             style="padding-bottom:5px; margin-top: 10px" @click="jumpadd">创建机器人</Button>
     
-    <Poptip confirm title="确定要删除所有机器人吗？" @on-ok="deleteOk">
+    <Poptip confirm title="确定要删除所有机器人吗？" @on-ok="deleteAll">
         <Button type="error" size="large" icon="android-remove-circle" 
                 style="padding-bottom:5px; margin-top: 10px">删除所有机器人</Button>
     </Poptip>
@@ -192,23 +192,25 @@ export default {
         })
         .then((response) => {
           console.log(response);  
+
+          this.$Message.success('成功删除');
+
+          //删除前端数据
+          this.bot_list.splice(index, 1);
+
+          //更新page组件当前页视图
+          //太坑了太坑了太坑了
+          var page = this.pageindex;
+          this.page_bot_list = [];
+          for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
+            if (i < this.bot_list.length) {
+              this.page_bot_list.push(this.bot_list[i]);
+            }
+          }
         })
         .catch((err) => {
           console.log('Chatbot delete请求错误：', err);
         })
-        
-        //删除前端数据
-        this.bot_list.splice(index, 1);
-
-        //更新page组件当前页视图
-        //太坑了太坑了太坑了
-        var page = this.pageindex;
-        this.page_bot_list = [];
-        for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
-          if (i < this.bot_list.length) {
-            this.page_bot_list.push(this.bot_list[i]);
-          }
-        }
       },
 
       jumpadd() {
@@ -252,24 +254,24 @@ export default {
           });
       },
       // 确认删除所有bot
-      deleteOk(){
+      deleteAll(){
         //delete请求
         this.$http.delete('/robots',{
           headers: {"Content-Type": "application/x-www-form-urlencoded"}
         })
         .then((response) => {
           this.$Message.success('已删除所有机器人');
+          //删除前端数据
+          this.bot_list = [];
+
+          //更新page组件视图
+          this.page_bot_list = [];
+
           console.log(response);  
         })
         .catch((err) => {
           console.log("Chatbot delete '/robots' 请求错误：", err);
         })
-        
-        //删除前端数据
-        this.bot_list = [];
-
-        //更新page组件视图
-        this.page_bot_list = [];
       },
     },
 

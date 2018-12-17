@@ -40,11 +40,13 @@ npm run dev
 │   │    ├── Chatbot.vue       // bot列表 /chatbot
 │   │    ├── BotDetail.vue     // bot详情 /botdetail/{{bot_id}}
 │   │    ├── BotAddGroup.vue   // 在bot下添加group //botaddgroup?id={{bot_id}}
+│   │    ├── AddBot.vue        // 添加bot /addbot?id={{bot_id}}
 │   │    ├── Group.vue         // group列表 /group
 │   │    ├── GroupDetail.vue   // group详情 /groupdetail/{{group_id}}
 │   │    ├── Service.vue       // service列表 /service
+│   │    ├── Service-expand.vue// 配合service下拉列表使用
 │   │    ├── ServDetail.vue    // service详情 /servdetail/{{serv_id}}
-│   │    ├── AddBot.vue        // 添加bot /addbot?id={{bot_id}}
+│   │    ├── CreateServList.vue// 创建一个service组 //createservlist？id={{serv_id}}
 │   ├── App.vue                // 入口页面
 │   └── main.js                // 入口 加载组件 初始化等
 
@@ -82,7 +84,8 @@ npm run dev
   - [x] 查看service列表
   - [x] 查看某个service的详细信息
   - [x] 添加一个自定义service组
-  - [ ] 删除一个service组
+  - [x] 删除一个自定义service组
+  - [x] 删除所有自定义service组
 
 
 
@@ -563,6 +566,65 @@ npm run dev
 
 
 
+&nbsp;
+
+### 3.4 删除一个自定义service组
+
+#### 基本信息
+
+**Path：** /services/{{id}}
+
+**Method：** DELETE
+
+**接口描述：**
+
+
+
+&nbsp;
+
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/x-www-form-urlencoded  |      |      |
+
+
+**路径参数**
+
+| 参数名称 | 示例 | 备注 |
+| -------- | ---- | ---- |
+| id  |      |      |
+
+
+
+&nbsp;
+
+### 3.5 删除所有自定义service组
+
+#### 基本信息
+
+**Path：** /services
+
+**Method：** DELETE
+
+**接口描述：**
+
+
+
+&nbsp;
+
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/x-www-form-urlencoded  |      |      |
+
+
+
 
 
 
@@ -572,4 +634,5 @@ npm run dev
 1. 用 mock.js 拦截了 ajax 请求并返回随机数据，接后端时把 mock 去掉即可；
 2. 目前登录也是用 mock 来验证用户名密码，如果要做登录的话去掉 mock 发后端验证用户名密码即可，如果不做的话就用目前的假登录也行；
 3. chatbot 和 group 页删除 bot 或 group 一次只能删一个，请求数据是 string （要删除的id）；botdetail 和 groupdetail 页删除 group 或 service 可以批量删，请求数据是 object[] （要删除的id列表）；都试了一下，最后用哪种都行；
-4. 尽可能的在响应式了，但还是不太理想，不管了...
+4. 尽可能的在响应式了，但还是不太理想，不管了...；
+5. 目前无法做到在分类下拉列表里多选元素，所以在自定义service组选择要加哪些service的时候无法分类显示。

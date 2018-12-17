@@ -118,6 +118,15 @@ const ServDetail = function(id){
     }
 }
 
+const DeleteService = function(opt){
+    const id = opt.url.substr(opt.url.length-5,5);
+    console.log('DeleteServID', id);
+}
+
+const DeleteAllService = function(opt){
+    console.log("delete all services");
+}
+
 // '/services' 所有service
 Mock.mock('/services', 'get', ServData);
 
@@ -129,3 +138,9 @@ Mock.mock(RegExp('/services' + ".*"), "get", (opt) =>{
     const id = opt.url.substr(opt.url.length-5,5);
     return Mock.mock(ServDetail(id));
 });
+
+// '/services' 删除所有自定义service组
+Mock.mock('/services', 'delete', DeleteAllService);
+
+// '/services/{{id}}' 删除某个自定义service组
+Mock.mock(RegExp('/services' + ".*"), "delete", DeleteService);

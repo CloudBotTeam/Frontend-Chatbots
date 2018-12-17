@@ -118,23 +118,25 @@ export default {
       })
       .then((response) => {
         console.log(response);  
+
+        this.$Message.success('成功删除');
+        
+        //删除前端数据
+        this.group_list.splice(index, 1);
+
+        //更新page组件当前页视图
+        //太坑了太坑了太坑了
+        var page = this.pageindex;
+        this.page_group_list = [];
+        for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
+            if (i < this.group_list.length) {
+            this.page_group_list.push(this.group_list[i]);
+            }
+        }
       })
       .catch((err) => {
         console.log('Chatbot delete请求错误：', err);
       })
-
-      //删除前端数据
-      this.group_list.splice(index, 1);
-
-      //更新page组件当前页视图
-      //太坑了太坑了太坑了
-      var page = this.pageindex;
-      this.page_group_list = [];
-      for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
-        if (i < this.group_list.length) {
-          this.page_group_list.push(this.group_list[i]);
-        }
-      }
     },
     setInitPage(page) {
       this.page_group_list = [];
