@@ -35,16 +35,11 @@ export default {
     name: "buttons",
     data() {
         return {
-            progresshow: false,
-            progresscount: 0,
-            progresstatus: "active",
-            progressspeed: 0,
             bot_list: [],
     
             pageindex: 1,
             page_bot_list: [],
-            lodding: false,
-            list_loadding: false,
+
             columns7: [
               {
                 title: "机器人名称",
@@ -69,23 +64,7 @@ export default {
               {
                 title: "状态",
                 ellipsis: "true",
-                filters: [
-                  {
-                    label: "处理完成",
-                    value: 1
-                  },
-                  {
-                    label: "正在处理",
-                    value: 2
-                  }
-                ],
-                filterMultiple: false,
-                filterMethod(value, row) {
-                  if (value === 0) return row.status === 0;
-                  else if (value === 1) return row.status === 1;
-                  else if (value === 2) return row.status === 2;
-                },
-
+               
                 render: (h, params) => {
                   const status = parseInt(params.row.status);
 
@@ -193,7 +172,7 @@ export default {
         .then((response) => {
           console.log(response);  
 
-          this.$Message.success('成功删除');
+          this.$Message.success('成功删除机器人' + this.bot_list[index].bot_id);
 
           //删除前端数据
           this.bot_list.splice(index, 1);

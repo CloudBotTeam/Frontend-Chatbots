@@ -66,9 +66,9 @@ npm run dev
   - [x] 查看某个bot的信息和它管理的所有group `Get` '/robots/{{bot_id}}'
   - [x] 删除一个bot `Delete` '/robots/{{bot_id}}'
   - [x] 删除一个bot下管理的某些group(可以多选批量删除) `Delete` '/robots/deletegroups'
-  - [x] 添加一个bot
-  - [x] 添加一些bot和group的对应关系
-  - [x] 删除所有bot
+  - [x] 添加一个bot `Post` '/robots'
+  - [x] 添加一些bot和group的对应关系 `Post` '/robots/addgroups'
+  - [x] 删除所有bot `Delete` '/robots'
 
 - group
   - [x] 查看group列表 `Get` '/groups'
@@ -81,11 +81,11 @@ npm run dev
   - [ ] 删除所有group
 
 - service
-  - [x] 查看service列表
-  - [x] 查看某个service的详细信息
-  - [x] 添加一个自定义service组
-  - [x] 删除一个自定义service组
-  - [x] 删除所有自定义service组
+  - [x] 查看service列表 `Get` '/services'
+  - [x] 查看某个service的详细信息 `Get` '/services/{{serv_id}}'
+  - [x] 添加一个自定义service组 `Post` '/services/{{serv_id}}'
+  - [x] 删除一个自定义service组 `Delete` '/services/{{serv_id}}'
+  - [x] 删除所有自定义service组 `Delete` '/services'
 
 
 

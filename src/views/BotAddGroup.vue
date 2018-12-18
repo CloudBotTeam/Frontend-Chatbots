@@ -16,7 +16,8 @@
         </Card>
         <br><hr><br>
         
-        <Col :md="24">   
+        <Col :md="24">
+
             <div style="position:relative;">
                 <Table border ref="selection" :columns="columns6" :height="550" 
                     :data="group_list" @on-selection-change="addList"></Table>    

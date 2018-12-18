@@ -191,21 +191,23 @@
                     }
                 })
                 .then((response) => {
+                    this.$Message.success('成功删除');
+
+                    //删除前端数据
+                    for(let i = 0; i < this.delet_groups.length; i++){
+                        for(let j = 0; j < this.managed_groups.length; j++){
+                            if(this.delet_groups[i].group_id === this.managed_groups[j].group_id){
+                                this.managed_groups.splice(j, 1);
+                                continue;
+                            }
+                        }
+                    }
+
                     console.log(response);
                 })
                 .catch((err) => {
                     console.log('Botdetail delete 请求错误：', err);
                 })
-                
-                //删除前端数据
-                for(let i = 0; i < this.delet_groups.length; i++){
-                    for(let j = 0; j < this.managed_groups.length; j++){
-                        if(this.delet_groups[i].group_id === this.managed_groups[j].group_id){
-                            this.managed_groups.splice(j, 1);
-                            continue;
-                        }
-                    }
-                }
             },
 
             deletList(arr) {
