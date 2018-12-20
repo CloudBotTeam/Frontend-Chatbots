@@ -39,14 +39,14 @@ npm run dev
 │   │    ├── errorPages        // 错误界面
 │   │    ├── Chatbot.vue       // bot列表 /chatbot
 │   │    ├── BotDetail.vue     // bot详情 /botdetail/{{bot_id}}
-│   │    ├── BotAddGroup.vue   // 在bot下添加group //botaddgroup?id={{bot_id}}
+│   │    ├── BotAddGroup.vue   // 在bot下添加group /botaddgroup?id={{bot_id}}
 │   │    ├── CreateBot.vue     // 添加bot /addbot?id={{bot_id}}
 │   │    ├── Group.vue         // group列表 /group
 │   │    ├── GroupDetail.vue   // group详情 /groupdetail/{{group_id}}
 │   │    ├── Service.vue       // service列表 /service
 │   │    ├── Service-expand.vue// 配合service下拉列表使用
 │   │    ├── ServDetail.vue    // service详情 /servdetail/{{serv_id}}
-│   │    ├── CreateServList.vue// 创建一个service组 //createservlist？id={{serv_id}}
+│   │    ├── CreateServList.vue// 创建一个service组 /createservlist？id={{serv_id}}
 │   ├── App.vue                // 入口页面
 │   └── main.js                // 入口 加载组件 初始化等
 
