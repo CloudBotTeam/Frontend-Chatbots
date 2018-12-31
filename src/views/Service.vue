@@ -101,7 +101,7 @@
                                 this.data_serv[i].serv_list[j]._disabled = true;
                         }
                     }
-                    console.log("service:", this.data_serv[2].serv_list);
+                    //console.log("service:", this.data_serv[2].serv_list);
                 })
                 .catch(function(err){
                     console.log("Service get '/services' 错误:" + err)

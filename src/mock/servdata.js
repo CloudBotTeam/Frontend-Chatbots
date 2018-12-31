@@ -7,7 +7,7 @@ const ServData = function(){
         {
             type: '电影',
             serv_default: 1,
-            id: 30000,
+            id: "30000",
             serv_list:[
                 {
                     serv_id: "00001",
@@ -29,7 +29,7 @@ const ServData = function(){
         {
             type: '追星',
             serv_default: 1,
-            id: 30001,
+            id: "30001",
             serv_list:[
                 {
                     serv_id: "00004",
@@ -51,7 +51,7 @@ const ServData = function(){
         {
             type: '游戏',
             serv_default: 1,
-            id: 30002,
+            id: "30002",
             serv_list:[
                 {
                     serv_id: "00007",
@@ -76,7 +76,7 @@ const ServData = function(){
         ServData.push({
             type: Mock.Random.cword(3, 5),
             serv_default: 0,
-            id: 30000 + i,
+            id: (30000 + i).toString(),
             serv_list:[
                 {
                     serv_id: "00001",

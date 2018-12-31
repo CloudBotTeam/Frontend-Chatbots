@@ -119,8 +119,6 @@ export default {
                 console.log("AddBot get '/groups' 成功");
                 this.group_list = res.data.data;
 
-                //显示第一页
-                //太坑了...终于解决了page_group_list视图不及时渲染的问题
                 this.pageindex = 1;
                 for (let i = 0; i < 10; i++) {
                     if (i < this.group_list.length) {
@@ -173,7 +171,7 @@ export default {
                     console.log(response);
                 })
                 .catch((err) => {
-                    console.log("AddBot post '/robot' 请求错误：", err);
+                    console.log("CreateBot post '/robots' 请求错误：", err);
                 })
             }
         },

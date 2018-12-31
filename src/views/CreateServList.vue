@@ -101,14 +101,6 @@ export default {
                             this.serv_list.push(res.data.data[i].serv_list[j]);
                     }
                 }
-
-                //显示第一页
-                this.pageindex = 1;
-                for (let i = 0; i < 10; i++) {
-                    if (i < this.serv_list.length) {
-                        this.page_serv_list.push(this.serv_list[i]);
-                    }
-                }
             })
             .catch(function(err){
                 console.log("CreateServList get '/services' 请求错误：" + err);

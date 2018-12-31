@@ -27,10 +27,8 @@
             </Col>
         </Row>
 
-        <Button type="primary" size="large" icon="android-add-circle" 
-            id='pickservices' style="padding-grouptom:5px;">添加Service</Button>
-        <Button type="primary" size="large" icon="android-remove-circle" 
-            id='removeservices' style="padding-grouptom:5px;" @click="remove">删除选中Service</Button>    
+        <Button type="primary" size="large" icon="android-add-circle" style="padding-grouptom:5px;" @click="jumpadd">添加Service</Button>
+        <Button type="primary" size="large" icon="android-remove-circle" style="padding-grouptom:5px;" @click="remove">删除选中Service</Button>    
     </div>
 </template>
 
@@ -183,6 +181,16 @@
             deletList(arr) {
                 this.delet_servs = arr;
                 console.log(this.delet_servs)
+            },
+
+
+            jumpadd() {
+                this.$router.push({
+                    path: "/groupaddserv",
+                    query: {
+                        id: this.group_id,
+                    }
+                })      
             },
         },
        

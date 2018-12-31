@@ -51,7 +51,9 @@ export const asyncRouterMap = [
 
       { path: '/group', name: 'Group', icon: "android-contacts", component: _import('Group') },
       { path: '/groupdetail/:id', name: 'GroupDetail', hidden: true, component: _import('GroupDetail') },
-      
+      { path: '/creategroup', name: 'CreateGroup', hidden: true, component: _import('CreateGroup') },
+      { path: '/groupaddserv', name: 'GroupAddServ', hidden: true, component: _import('GroupAddServ') },
+
       { path: '/service', name: 'Service', icon: "ios-paperplane", component: _import('Service') },
       { path: '/servdetail/:id', name: 'ServDetail', hidden: true, component: _import('ServDetail') },
       { path: '/createservlist', name: 'CreateServList', hidden: true, component: _import('CreateServList') },

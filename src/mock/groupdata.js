@@ -40,6 +40,10 @@ const GroupDetail = function(id){
     }
 }
 
+const DeleteAllGroup = function(){
+    console.log("delete all groups");
+}
+
 const DeleteGroup = function(opt){
     const id = opt.url.substr(opt.url.length-5,5);
     console.log('DeleteGroupID:', id);
@@ -50,19 +54,37 @@ const DeleteServs = function(opt){
     console.log('GroupID:', data.group_id, 'DeleteServID:', data.delet_servs);
 }
 
+const CreateGroup = function(opt){
+    let data = JSON.parse(opt.body);
+    console.log('GroupID:', data.data.group_id, 'GroupType:', data.data.group_type,
+                'GroupName:', data.data.group_name, 'Servs:', data.data.managed_servs);
+}
+
+const AddServs = function(opt){
+    let data = JSON.parse(opt.body);
+    console.log('GroupID:', data.data.group_id, 'Servs:', data.data.add_servs);
+}
+
 //请求包含 '/groups' 字段的接口，会被拦截到该随机数据格式
 Mock.mock('/groups', 'get', GroupData);
 
 //'/groups/{{group_id}}'
 Mock.mock(RegExp('/groups' + ".*"), "get", (opt) =>{
-    // 最佳实践，将请求和参数都打印出来，以便调试
     const group_id = opt.url.substr(opt.url.length-5,5);
     return Mock.mock(GroupDetail(group_id));
 });
 
-// '/robots/deleteservs'
+// '/robots/deleteservs' 删除某个group下的一些services 
 Mock.mock('/groups/deleteservs', 'delete', DeleteServs);
 
-//'/groups/{{group_id}}'
+// '/robots' 删除所有group
+Mock.mock('/groups', "delete", DeleteAllGroup);
+
+//'/groups/{{group_id}}' 删除某个group
 Mock.mock(RegExp('/groups' + ".*"), "delete", DeleteGroup);
 
+// '/groups' 添加一个group
+Mock.mock('/groups', "post", CreateGroup);
+
+// '/groups/addservs' 在某个group下添加一些service
+Mock.mock('/groups/addservs', 'post', AddServs);

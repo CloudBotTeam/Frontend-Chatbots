@@ -43,6 +43,8 @@ npm run dev
 │   │    ├── CreateBot.vue     // 添加bot /addbot?id={{bot_id}}
 │   │    ├── Group.vue         // group列表 /group
 │   │    ├── GroupDetail.vue   // group详情 /groupdetail/{{group_id}}
+│   │    ├── GroupAddServ.vue  // 在group下添加service /groupaddserv?id={{group_id}}
+│   │    ├── CreateGrop.vue    // 添加group /addgroup?id={{group_id}}
 │   │    ├── Service.vue       // service列表 /service
 │   │    ├── Service-expand.vue// 配合service下拉列表使用
 │   │    ├── ServDetail.vue    // service详情 /servdetail/{{serv_id}}
@@ -75,10 +77,10 @@ npm run dev
   - [x] 查看某个group的信息和它管理的所有service `Get` '/groups/{{group_id}}'
   - [x] 删除一个group `Delete` '/groups/{{group_id}}'
   - [x] 删除一个group下管理的某些service(可以多选批量删除) `Delete` '/groups/deleteservs'
-  - [ ] 添加一个group
-  - [ ] 添加一些group和service的对应关系
-  - [ ] group管理的service分类显示
-  - [ ] 删除所有group
+  - [x] 添加一个group
+  - [x] 添加一些group和service的对应关系
+  - [ ] ~~group管理的service分类显示(我再尝试着挣扎一下)~~
+  - [x] 删除所有group
 
 - service
   - [x] 查看service列表 `Get` '/services'
@@ -463,8 +465,102 @@ npm run dev
 | ├─ serv_id |  string  |      |    |
 
 
+&nbsp;
+
+### 2.5 添加一个 group
+
+#### 基本信息
+
+**Path：** /groups
+
+**Method：** POST
+
+**接口描述：**
+
+
+
+&nbsp;
+
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/json  |      |      |
+
+**Body**
+
+| 参数名称 | 类型 | 默认值 |	是否必要 | 备注 |
+| -------- | ---- | ---- | ---- | ---- |
+| group_id  |  string  |      |    |    |
+| group_name  |  string  |      |    |    |
+| group_type  |  string  |      |    |    |
+| managed_servs |  object[]  |    |   非必要   |  item 类型: object  |
+| ├─ serv_id |  string  |      |  非必要  |    |
+
+
+&nbsp;
+
+### 2.6 在一个 group 下添加一些 services
+
+#### 基本信息
+
+**Path：** /groups/addservs
+
+**Method：** POST
+
+**接口描述：**
+
+
+
+&nbsp;
+
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/json  |      |      |
+
+**Body**
+
+| 参数名称 | 类型 | 默认值 | 备注 |
+| -------- | ---- | ---- | ---- |
+| group_id  |  string  |      |    |
+| add_servs |  object[]  |      |  item 类型: object  |
+| ├─ serv_id |  string  |      |    |
+
+
+
+&nbsp;
+### 2.7 删除所有 group
+
+#### 基本信息
+
+**Path：** /groups
+
+**Method：** DELETE
+
+**接口描述：**
+
+
+
+&nbsp;
+#### 请求参数
+
+**Headers**
+
+| 参数名称 | 参数值 | 示例 | 备注 |
+| -------- | ---- | ---- | ---- |
+| Content-Type  |  application/x-www-form-urlencoded  |      |      |
+
 
 &nbsp;&nbsp;
+
+
+
 ## 3. service
 
 ### 3.1 获取所有 service

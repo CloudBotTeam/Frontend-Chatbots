@@ -20,6 +20,15 @@
             ></Page>
         </Col>
     </Row>
+
+    <Button type="primary" size="large" icon="android-add-circle" 
+            style="padding-bottom:5px; margin-top: 10px" @click="jumpadd">创建群</Button>
+    
+    <Poptip confirm title="确定要删除所有群吗？" @on-ok="deleteAll">
+        <Button type="error" size="large" icon="android-remove-circle" 
+                style="padding-bottom:5px; margin-top: 10px">删除所有群</Button>
+    </Poptip>
+
   </div>
 </template>
 
@@ -150,23 +159,55 @@ export default {
     },
     getGroupdata(){
         this.$http.get('/groups') //使用axios发送请求
-          .then((res)=>{ //连接成功后回调函数
-            console.log("get '/groups' 成功");
-            this.group_list = res.data.data;
+        .then((res)=>{ //连接成功后回调函数
+          console.log("get '/groups' 成功");
+          this.group_list = res.data.data;
 
-            //显示第一页
-            //太坑了...终于解决了page_group_list视图不及时渲染的问题
-            this.pageindex = 1;
-            for (let i = 0; i < 10; i++) {
-              if (i < this.group_list.length) {
-                this.page_group_list.push(this.group_list[i]);
-              }
+          //显示第一页
+          //太坑了...终于解决了page_group_list视图不及时渲染的问题
+          this.pageindex = 1;
+          for (let i = 0; i < 10; i++) {
+            if (i < this.group_list.length) {
+              this.page_group_list.push(this.group_list[i]);
             }
-          })
-          .catch(function(err){
-            console.log("连接错误"+err);
-          });
-      }
+          }
+        })
+        .catch(function(err){
+          console.log("连接错误"+err);
+        });
+    },
+    jumpadd() {
+      var maxid = '';
+      for (let i = 0; i < this.group_list.length; i++) 
+        if (this.group_list[i].group_id > maxid) maxid = this.group_list[i].group_id;
+
+      this.$router.push({
+        path: "/creategroup",
+        query: {
+          id: (parseInt(maxid) + 1).toString()
+        }
+      })      
+    },
+    // 确认删除所有群
+    deleteAll(){
+      //delete请求
+      this.$http.delete('/groups',{
+        headers: {"Content-Type": "application/x-www-form-urlencoded"}
+      })
+      .then((response) => {
+        this.$Message.success('已删除所有群');
+        //删除前端数据
+        this.group_list = [];
+
+        //更新page组件视图
+        this.page_group_list = [];
+
+        console.log(response);  
+      })
+      .catch((err) => {
+        console.log("Group delete '/groups' 请求错误：", err);
+      })
+    },
   },
   mounted() {
     this.setInitPage(1);
