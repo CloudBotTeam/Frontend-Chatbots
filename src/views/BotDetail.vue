@@ -181,6 +181,7 @@
                         else if(res.data.data.status === 1)this.status = "运行中";
                         else if(res.data.data.status === 2)this.status = "故障";
                         else this.status = "未登录";
+                        //console.log("stat", res.data.data);
                     })
                     .catch(function(err){
                         console.log("连接错误"+err)
@@ -237,7 +238,11 @@
             },
 
             jumplogin(){
-                window.open(this.connect_url)  
+                if(this.status != "未登录"){
+                    console.log(this.status);
+                    this.$Message.success("你已登录过");
+                }
+                else window.open(this.connect_url)  
             }
         },
        
