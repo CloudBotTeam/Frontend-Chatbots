@@ -42,22 +42,10 @@ export default {
 
             columns7: [
               {
-                title: "机器人名称",
-                key: "bot_name",
-                ellipsis: "true"
-              },
-              {
                 title: "机器人id",
                 ellipsis: "true",
                 key: "bot_id"
               },
-              /*
-              {
-                title: "创建时间",
-                ellipsis: "true",
-                key: "timestamp"
-              },
-              */
               {
                 title: "类型",
                 key: "bot_type",

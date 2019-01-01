@@ -9,7 +9,7 @@ const GroupData = function(){
         let Group = { // 根据数据模板生成模拟数据
             group_name: Mock.Random.last(), // 随机生成群名字
             group_id: (20000+i).toString(), // 随机生成群id
-            timestamp: Mock.Random.datetime(), // 随机生成创建时间
+            //timestamp: Mock.Random.datetime(), // 随机生成创建时间
             group_type: groupType[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         }
         GroupList.push(Group)
@@ -31,7 +31,7 @@ const GroupDetail = function(id){
     
     let GroupInfo = {
         group_name: Mock.Random.last(),
-        timestamp: Mock.Random.datetime(),
+        //timestamp: Mock.Random.datetime(),
         group_type: groupType[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         managed_servs:servlist,
     }

@@ -118,10 +118,9 @@ npm run dev
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | bot_list  |  object []  |      |  item 类型: object  |
-| ├─ bot_name |  string  |      |    |
+| ├─ bot_id |  string  |      |    |
 | ├─ bot_type |  string  |      |    |
 | ├─ status |  integer  |      |  目前是int（0/1/2/3），可以改成string（'未启动'/'运行中'/'故障'/'未登录'）  |
-| ├─ timestamp |  string  |      | 删掉                                                         |
 
 
 
@@ -157,9 +156,7 @@ npm run dev
 
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
-| bot_name  |  string  |      |    |
 | bot_type  |  string  |      |    |
-| timestamp  |  string  |      |  删掉  |
 | connect_url  |  string  |      |  登录链接  |
 | group_list  |  object[]  |      |  item 类型: object  |
 | ├─ group_id |  string  |      |    |
@@ -263,8 +260,6 @@ npm run dev
 
 | 参数名称 | 类型 | 默认值 |	是否必要 | 备注 |
 | -------- | ---- | ---- | ---- | ---- |
-| bot_id  |  string  |      |    |    |
-| bot_name  |  string  |      |    |    |
 | bot_type  |  string  |      |    |    |
 | managed_groups |  object[]  |    |   非必要   |  item 类型: object  |
 | ├─ group_id |  string  |      |  非必要  |    |
@@ -352,9 +347,9 @@ npm run dev
 | 参数名称 | 类型 | 默认值 | 备注 |
 | -------- | ---- | ---- | ---- |
 | group_list  |  object []  |      |  item 类型: object  |
+| ├─ group_id |  string  |      |    |
 | ├─ group_name |  string  |      |    |
 | ├─ group_type |  string  |      |    |
-| ├─ timestamp |  string  |      |  删掉  |
 
 
 
@@ -392,7 +387,6 @@ npm run dev
 | -------- | ---- | ---- | ---- |
 | group_name  |  string  |      |    |
 | group_type  |  string  |      |    |
-| timestamp  |  string  |      | 删掉              |
 | serv_list  |  object[]  |      |  item 类型: object  |
 | ├─ serv_id |  string  |      |    |
 | ├─ serv_name |  string  |      |    |

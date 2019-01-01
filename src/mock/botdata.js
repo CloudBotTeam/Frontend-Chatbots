@@ -4,11 +4,10 @@ const Type = ['QQ', 'WeChat'];
 
 const BotData = function(){
     let ChatbotList = []; // 定义需要的数据
-    for (let i = 0; i <= 5; i++) {
+    for (let i = 0; i <= 7; i++) {
         let Chatbot = { // 根据数据模板生成模拟数据
-            bot_name: Mock.Random.last(), // 随机生成机器人名字
             bot_id: (10000+i).toString(), // 随机生成机器人id
-            timestamp: Mock.Random.datetime(), // 随机生成创建时间
+            //timestamp: Mock.Random.datetime(), // 随机生成创建时间
             bot_type: Type[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
             status: Mock.Random.integer(0, 3), // 随机生成状态, 未启动:0, 运行中:1, 故障:2, 未登录:3
         }
@@ -26,14 +25,13 @@ const BotDetail = function(id){
         grouplist.push({
             group_name: Mock.Random.last(),
             group_id: (20000+i).toString(),
-            timestamp: Mock.Random.datetime(),
+            //timestamp: Mock.Random.datetime(),
             group_type: Type[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         })
     }
 
     let BotInfo = {
-        bot_name: Mock.Random.last(),
-        timestamp: Mock.Random.datetime(),
+        //timestamp: Mock.Random.datetime(),
         bot_type: Type[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         managed_groups:grouplist,
         connect_url: "https://www.baidu.com",//随机url
@@ -60,8 +58,7 @@ const DeleteGroups = function(opt){
 
 const CreateBot = function(opt){
     let data = JSON.parse(opt.body);
-    console.log('BotID:', data.data.bot_id, 'BotType:', data.data.bot_type,
-                'BotName:', data.data.bot_name, 'Groups:', data.data.managed_groups);
+    console.log('BotType:', data.data.bot_type, 'Groups:', data.data.managed_groups);
 }
 
 const AddGroups = function(opt){

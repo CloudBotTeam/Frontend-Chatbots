@@ -9,11 +9,9 @@
                 <br>
 
                 <Card>
-                    <Col span="6"><h6>机器人名称: {{bot_name}}</h6></Col> 
-                    <Col span="6"><h6>机器人id: {{bot_id}}</h6></Col> 
-                    <Col span="6"><h6>类型: {{bot_type}}</h6></Col>
-                    <Col span="6"><h6>状态: {{status}}</h6></Col>  
-                    <!--<Col span="6"><h6>创建时间: {{bot_create_timestamp}}</h6></Col> -->
+                    <Col span="8"><h6>机器人id: {{bot_id}}</h6></Col> 
+                    <Col span="8"><h6>类型: {{bot_type}}</h6></Col>
+                    <Col span="8"><h6>状态: {{status}}</h6></Col>  
                     <br>
                 </Card>
 
@@ -52,8 +50,6 @@
                 json_list:[],
                 bot_type:'',
                 bot_id:this.$route.params.id,
-                bot_create_timestamp:'',
-                bot_name:'',
                 status:'',
                 connect_url:'',
                 page_result_list:[],
@@ -166,12 +162,8 @@
                 this.$http.get('/robots/:' + this.bot_id) //使用axios发送请求
                     .then((res)=>{ //连接成功后回调函数
                         console.log("BotDetail get '/robots' 成功");
-                        //name
-                        this.bot_name = res.data.data.bot_name;
                         //type
                         this.bot_type = res.data.data.bot_type;
-                        //time
-                        this.bot_create_timestamp = res.data.data.timestamp;
                         //managed_groups
                         this.managed_groups = res.data.data.managed_groups;
                         //connect_url

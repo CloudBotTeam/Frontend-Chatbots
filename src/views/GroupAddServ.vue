@@ -8,10 +8,9 @@
         <br>
 
         <Card>
-            <Col span="6"><h6>群名称: {{group_name}}</h6></Col> 
-            <Col span="6"><h6>群id: {{group_id}}</h6></Col> 
-            <Col span="6"><h6>类型: {{group_type}}</h6></Col>  
-            <Col span="6"><h6>创建时间: {{group_create_timestamp}}</h6></Col> 
+            <Col span="8"><h6>群名称: {{group_name}}</h6></Col> 
+            <Col span="8"><h6>群id: {{group_id}}</h6></Col> 
+            <Col span="8"><h6>类型: {{group_type}}</h6></Col>  
             <br>
         </Card>
         <br><hr><br>
@@ -50,7 +49,6 @@ export default {
         return {
             group_id: this.$route.query.id,
             group_type:'',
-            group_create_timestamp:'',
             group_name:'',
             managed_servs: [],
 
@@ -171,8 +169,6 @@ export default {
                 this.group_name = res.data.data.group_name;
                 //type
                 this.group_type = res.data.data.group_type;
-                //time
-                this.group_create_timestamp = res.data.data.timestamp;
                 //managed_groups
                 this.managed_servs = res.data.data.managed_servs;
             })

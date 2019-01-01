@@ -8,10 +8,8 @@
         <br>
 
         <Card>
-            <Col span="6"><h6>机器人名称: {{bot_name}}</h6></Col> 
-            <Col span="6"><h6>机器人id: {{bot_id}}</h6></Col> 
-            <Col span="6"><h6>类型: {{bot_type}}</h6></Col>  
-            <Col span="6"><h6>创建时间: {{bot_create_timestamp}}</h6></Col> 
+            <Col span="12"><h6>机器人id: {{bot_id}}</h6></Col> 
+            <Col span="12"><h6>类型: {{bot_type}}</h6></Col>   
             <br>
         </Card>
         <br><hr><br>
@@ -19,7 +17,7 @@
         <Col :md="24">
 
             <div style="position:relative;">
-                <Table border ref="selection" :columns="columns6" :height="550" 
+                <Table border ref="selection" :columns="columns6" :height="450" 
                     :data="group_list" @on-selection-change="addList"></Table>    
             </div>
 
@@ -40,8 +38,6 @@ export default {
         return {
             bot_id: this.$route.query.id,
             bot_type:'',
-            bot_create_timestamp:'',
-            bot_name:'',
             managed_groups: [],
 
             group_list: [],
@@ -63,11 +59,6 @@ export default {
                     title: "群id",
                     ellipsis: "true",
                     key: "group_id"
-                },
-                {
-                    title: "创建时间",
-                    ellipsis: "true",
-                    key: "timestamp"
                 },
                 {
                     title: "类型",
@@ -141,8 +132,6 @@ export default {
                 this.bot_name = res.data.data.bot_name;
                 //type
                 this.bot_type = res.data.data.bot_type;
-                //time
-                this.bot_create_timestamp = res.data.data.timestamp;
                 //managed_groups
                 this.managed_groups = res.data.data.managed_groups;
             })

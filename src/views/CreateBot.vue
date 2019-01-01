@@ -3,10 +3,6 @@
         <h4>输入新机器人信息</h4>
         <br><hr><br>
         <Form :model="formItem" :label-width="80">
-            <FormItem label="机器人名称">
-                <Input v-model="formItem.input" placeholder="Enter something..." @on-blur="inputName"></Input>
-            </FormItem>
-    
             <FormItem label="机器人类型">
                 <RadioGroup v-model="button1" type="button" @on-change="selectType">
                     <Radio label="QQ"></Radio>
@@ -16,7 +12,7 @@
 
             <FormItem label="选择群">
                 <Table border ref="selection" :columns="columns7" :data="group_list" 
-                    @on-selection-change="selectGroup" height="550"></Table>
+                    @on-selection-change="selectGroup" height="450"></Table>
             </FormItem>
             
         
@@ -43,7 +39,6 @@ export default {
 
             managed_groups: [],
             bot_type: '',
-            bot_name: '',
             bot_id: '', 
 
             columns7: [
@@ -61,11 +56,6 @@ export default {
                     title: "群id",
                     ellipsis: "true",
                     key: "group_id"
-                },
-                {
-                    title: "创建时间",
-                    ellipsis: "true",
-                    key: "timestamp"
                 },
                 {
                     title: "类型",
@@ -140,24 +130,15 @@ export default {
         selectType(selected_type) {
             this.bot_type = selected_type;
         },
-        inputName(opt) {
-            this.bot_name = opt.target.value;
-            console.log(this.bot_name);
-        },
         Create(){
             //未选择类型
             if(this.bot_type == '')
                 this.$Message.error('请选择机器人类型');
-            //未输入名称
-            if(this.bot_name == '')
-                this.$Message.error('请输入机器人名称');
             //满足条件
-            if(this.bot_type != '' && this.bot_name != ''){
+            else{
                 //post请求
                 this.$http.post('/robots',{
                     data:{
-                        bot_id: this.$route.query.id,
-                        bot_name: this.bot_name,
                         bot_type: this.bot_type,
                         managed_groups: this.managed_groups,
                     },
