@@ -10,8 +10,9 @@ const BotData = function(){
             bot_id: (10000+i).toString(), // 随机生成机器人id
             timestamp: Mock.Random.datetime(), // 随机生成创建时间
             bot_type: Type[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
-            status: Mock.Random.integer(0, 2), // 随机生成状态, 未启动:0, 运行中:1, 故障:2
+            status: Mock.Random.integer(0, 3), // 随机生成状态, 未启动:0, 运行中:1, 故障:2, 未登录:3
         }
+        //console.log(Chatbot.connect_url),
         ChatbotList.push(Chatbot)
     }
     return{
@@ -27,6 +28,7 @@ const BotDetail = function(id){
             group_id: (20000+i).toString(),
             timestamp: Mock.Random.datetime(),
             group_type: Type[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
+            status: Mock.Random.integer(0, 3), // 随机生成状态, 未启动:0, 运行中:1, 故障:2, 未登录:3
         })
     }
 
@@ -35,6 +37,7 @@ const BotDetail = function(id){
         timestamp: Mock.Random.datetime(),
         bot_type: Type[Mock.Random.integer(0, 1)], // 随机生成类型, QQ:0, WeChat:1
         managed_groups:grouplist,
+        connect_url: "https://www.baidu.com",//随机url
     }
     return{
         data:BotInfo

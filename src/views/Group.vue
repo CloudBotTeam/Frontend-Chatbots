@@ -53,11 +53,12 @@ export default {
               ellipsis: "true",
               key: "group_id"
             },
+            /*
             {
               title: "创建时间",
               ellipsis: "true",
               key: "timestamp"
-            },
+            },*/
             {
               title: "类型",
               key: "group_type",

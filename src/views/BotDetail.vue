@@ -11,8 +11,9 @@
                 <Card>
                     <Col span="6"><h6>机器人名称: {{bot_name}}</h6></Col> 
                     <Col span="6"><h6>机器人id: {{bot_id}}</h6></Col> 
-                    <Col span="6"><h6>类型: {{bot_type}}</h6></Col>  
-                    <Col span="6"><h6>创建时间: {{bot_create_timestamp}}</h6></Col> 
+                    <Col span="6"><h6>类型: {{bot_type}}</h6></Col>
+                    <Col span="6"><h6>状态: {{status}}</h6></Col>  
+                    <!--<Col span="6"><h6>创建时间: {{bot_create_timestamp}}</h6></Col> -->
                     <br>
                 </Card>
 
@@ -27,6 +28,8 @@
             </Col>
         </Row>
 
+        <Button type="success" size="large" icon="ios-contact" style="padding-bottom:5px;" @click="jumplogin">登录</Button>
+  
         <Button type="primary" size="large" icon="android-add-circle" style="padding-bottom:5px;" @click="jumpadd">添加群</Button>
         <Button type="primary" size="large" icon="android-remove-circle" style="padding-bottom:5px;" @click="remove">删除所选群</Button>    
     </div>
@@ -51,6 +54,8 @@
                 bot_id:this.$route.params.id,
                 bot_create_timestamp:'',
                 bot_name:'',
+                status:'',
+                connect_url:'',
                 page_result_list:[],
                 managed_groups:[],
                 delet_groups:[],
@@ -169,6 +174,13 @@
                         this.bot_create_timestamp = res.data.data.timestamp;
                         //managed_groups
                         this.managed_groups = res.data.data.managed_groups;
+                        //connect_url
+                        this.connect_url = res.data.data.connect_url;
+                        //status
+                        if(res.data.data.status === 0)this.status = "未启动";
+                        else if(res.data.data.status === 1)this.status = "运行中";
+                        else if(res.data.data.status === 2)this.status = "故障";
+                        else this.status = "未登录";
                     })
                     .catch(function(err){
                         console.log("连接错误"+err)
@@ -223,6 +235,10 @@
                     }
                 })      
             },
+
+            jumplogin(){
+                window.open(this.connect_url)  
+            }
         },
        
     }

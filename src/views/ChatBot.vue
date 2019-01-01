@@ -51,11 +51,13 @@ export default {
                 ellipsis: "true",
                 key: "bot_id"
               },
+              /*
               {
                 title: "创建时间",
                 ellipsis: "true",
                 key: "timestamp"
               },
+              */
               {
                 title: "类型",
                 key: "bot_type",
@@ -106,7 +108,20 @@ export default {
                         },
                         "故障"
                       )
-                    ]);  
+                    ]);
+                  else if (status === 3)
+                    return h("div", [
+                      h(
+                        "Tag",
+                        {
+                          props: {
+                            type: "dot",
+                            color: "grey"
+                          }
+                        },
+                        "未登录"
+                      )
+                    ]);    
                 }
               },
               {

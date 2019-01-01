@@ -120,8 +120,8 @@ npm run dev
 | bot_list  |  object []  |      |  item 类型: object  |
 | ├─ bot_name |  string  |      |    |
 | ├─ bot_type |  string  |      |    |
-| ├─ status |  integer  |      |  目前是int（0/1/2），可以改成string（'未启动'/'运行中'/'故障'）  |
-| ├─ timestamp |  string  |      |  先留着，可以删掉  |
+| ├─ status |  integer  |      |  目前是int（0/1/2/3），可以改成string（'未启动'/'运行中'/'故障'/'未登录'）  |
+| ├─ timestamp |  string  |      | 删掉                                                         |
 
 
 
@@ -159,7 +159,8 @@ npm run dev
 | -------- | ---- | ---- | ---- |
 | bot_name  |  string  |      |    |
 | bot_type  |  string  |      |    |
-| timestamp  |  string  |      |  先留着，可以删掉  |
+| timestamp  |  string  |      |  删掉  |
+| connect_url  |  string  |      |  登录链接  |
 | group_list  |  object[]  |      |  item 类型: object  |
 | ├─ group_id |  string  |      |    |
 | ├─ group_name |  string  |      |    |
@@ -353,7 +354,7 @@ npm run dev
 | group_list  |  object []  |      |  item 类型: object  |
 | ├─ group_name |  string  |      |    |
 | ├─ group_type |  string  |      |    |
-| ├─ timestamp |  string  |      |  先留着，可以删掉  |
+| ├─ timestamp |  string  |      |  删掉  |
 
 
 
@@ -391,7 +392,7 @@ npm run dev
 | -------- | ---- | ---- | ---- |
 | group_name  |  string  |      |    |
 | group_type  |  string  |      |    |
-| timestamp  |  string  |      |  先留着，可以删掉  |
+| timestamp  |  string  |      | 删掉              |
 | serv_list  |  object[]  |      |  item 类型: object  |
 | ├─ serv_id |  string  |      |    |
 | ├─ serv_name |  string  |      |    |
