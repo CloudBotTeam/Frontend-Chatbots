@@ -196,15 +196,8 @@ export default {
       },
 
       jumpadd() {
-        var maxid = '';
-        for (let i = 0; i < this.bot_list.length; i++) 
-          if (this.bot_list[i].bot_id > maxid) maxid = this.bot_list[i].bot_id;
-
         this.$router.push({
           path: "/createbot",
-          query: {
-            id: (parseInt(maxid) + 1).toString()
-          }
         })      
       },
 

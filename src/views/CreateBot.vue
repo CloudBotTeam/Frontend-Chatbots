@@ -39,7 +39,6 @@ export default {
 
             managed_groups: [],
             bot_type: '',
-            bot_id: '', 
 
             columns7: [
                 {
