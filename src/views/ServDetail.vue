@@ -8,9 +8,9 @@
                 <br>
 
                 <Card>
-                    <Col span="6"><h6>名称: {{serv_name}}</h6></Col> 
-                    <Col span="6"><h6>ID: {{serv_id}}</h6></Col> 
-                    <Col span="6"><h6>类型: {{serv_type}}</h6></Col>  
+                    <Col span="12"><h6>名称: {{serv_name}}</h6></Col> 
+                    <Col span="12"><h6>ID: {{serv_id}}</h6></Col> 
+                    <!--<Col span="6"><h6>类型: {{serv_type}}</h6></Col>-->
                     <br>
                 </Card>
 
@@ -37,13 +37,13 @@
         },
         methods:{
             getServInfo(){
-                this.$http.get('/services/:' + this.$route.params.id)
+                this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/services/' + this.$route.params.id)
                 .then((res)=>{
-                    console.log(res.data.data);
+                    console.log(res.data);
                     this.serv_id = this.$route.params.id;
-                    this.serv_name = res.data.data.serv_name;
-                    this.serv_type = res.data.data.serv_type;
-                    this.serv_description = res.data.data.serv_description;
+                    this.serv_name = res.data.serv_name;
+                    //this.serv_type = res.data.data.serv_type;
+                    this.serv_description = res.data.serv_description;
                 })
                 .catch(function(err){
                     console.log("ServDetail get '/services' 请求错误：" + err);

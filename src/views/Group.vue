@@ -21,6 +21,7 @@
         </Col>
     </Row>
 
+    <!--
     <Button type="primary" size="large" icon="android-add-circle" 
             style="padding-bottom:5px; margin-top: 10px" @click="jumpadd">创建群</Button>
     
@@ -28,6 +29,7 @@
         <Button type="error" size="large" icon="android-remove-circle" 
                 style="padding-bottom:5px; margin-top: 10px">删除所有群</Button>
     </Poptip>
+    -->
 
   </div>
 </template>
@@ -117,7 +119,7 @@ export default {
   methods: {
     remove(index) {
       //delete请求
-      this.$http.delete('/groups/' + this.group_list[index].group_id,{
+      this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/groups/' + this.group_list[index].group_id,{
         headers: {"Content-Type": "application/x-www-form-urlencoded"}
       })
       .then((response) => {
@@ -153,7 +155,7 @@ export default {
       }
     },
     getGroupdata(){
-        this.$http.get('/groups') //使用axios发送请求
+        this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/groups') //使用axios发送请求
         .then((res)=>{ //连接成功后回调函数
           console.log("get '/groups' 成功");
           this.group_list = res.data.data;
@@ -178,15 +180,12 @@ export default {
 
       this.$router.push({
         path: "/creategroup",
-        query: {
-          id: (parseInt(maxid) + 1).toString()
-        }
       })      
     },
     // 确认删除所有群
     deleteAll(){
       //delete请求
-      this.$http.delete('/groups',{
+      this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/groups',{
         headers: {"Content-Type": "application/x-www-form-urlencoded"}
       })
       .then((response) => {

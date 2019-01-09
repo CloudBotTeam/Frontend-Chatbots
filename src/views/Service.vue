@@ -4,10 +4,11 @@
             <div style="" class="doc-header">
                 <h1>Service List</h1>
                 <br>
-                <p>你可以在这里自定义Service组</p>
             </div>
             <br>
 
+            <Table :columns="columns_serv" :data="serv_list"></Table>
+            <!--
             <Table :columns="columns_serv" :data="data_serv"></Table>
             <Button type="primary" size="large" icon="android-add-circle" @click="jumpCreate"
                     style="padding-bottom:5px; margin-top: 30px">自定义Service组</Button>
@@ -15,16 +16,19 @@
                 <Button type="error" size="large" icon="android-remove-circle" 
                         style="padding-bottom:5px; margin-top: 30px">删除所有自定义service组</Button>
             </Poptip>
+            -->
         </Row>
     </div>
 </template>
 <script>
-    import expandRow from './Service-expand.vue';
+    //import global from '../components/Address'//引用模块进来
+    //import expandRow from './Service-expand.vue';
     export default {
-        components: { expandRow },
+        //components: { expandRow },
         data () {
             return {
                 columns_serv: [
+                    /*
                     {
                         type: 'expand',
                         width: 50,
@@ -79,9 +83,62 @@
                                 ]);
                             }
                         }
+                    }*/
+                    {
+                        title: '名称',
+                        /*
+                        render: (h, params) => {
+                            return h('div', [
+                                h('strong',{
+                                    style:{
+                                        color:"#2d8cf0",
+                                        cursor:"pointer",
+                                    },
+                                }, params.row.serv_name)
+                            ]);
+                        },     */
+                        key: 'serv_name',      
+                    },
+                    {
+                        title: 'ID',
+                        key: 'serv_id',
+                    },   
+                    {
+                        title: "查看",
+                        key: "action",
+                        align: "center",
+                        ellipsis: "true",
+
+                        render: (h, params) => {
+                            return h("div", [
+                                h(
+                                    "Button",
+                                    {
+                                        props: {
+                                            type: "primary",
+                                            size: "small",
+                                            icon: "eye"
+                                        },
+                                        style: {
+                                            marginRight: "5px"
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.$router.push({
+                                                    path:
+                                                    //"/servdetail/" + this.row.serv_list[params.index].serv_id
+                                                    "/servdetail/" + this.serv_list[params.index].serv_id
+                                                });
+                                            }
+                                        },
+                                    },
+                                ),
+                            ]);
+                        }
                     }
                 ],
-                data_serv: [],
+                //data_serv: [],
+                serv_list: [],
             }
         },
         mounted(){
@@ -89,24 +146,29 @@
         },
         methods:{
             getServData(){
-                this.$http.get('/services') //使用axios发送请求
+                //console.log(this.global.QueryAdd + ':' + this.global.gateWay + '/services');
+                this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/services') //使用axios发送请求
                 .then((res)=>{ //连接成功后回调函数
                     console.log("Service get '/services' 成功");
-                    this.data_serv = res.data.data;
+                    //this.data_serv = res.data.serv_list;
+                    this.serv_list = res.data.serv_list;
+                    //console.log(res.data);
+                    /*
                     //禁止选择自定义分类中的service
-                    
                     for(let i = 0; i < this.data_serv.length; i++){
+                        //console.log("data:",this.data_serv[i]);
                         if(this.data_serv[i].serv_default === 0){
                             for(let j = 0; j < this.data_serv[i].serv_list.length; j++)
                                 this.data_serv[i].serv_list[j]._disabled = true;
                         }
                     }
-                    //console.log("service:", this.data_serv[2].serv_list);
+                    */
                 })
                 .catch(function(err){
                     console.log("Service get '/services' 错误:" + err)
                 });
             },
+            /*
             jumpCreate(){
                 var maxid = '';
                 for (let i = 0; i < this.data_serv.length; i++) 
@@ -157,7 +219,7 @@
                 .catch((err) => {
                     console.log("Service '/services' delete 请求错误：", err);
                 })
-            },
+            },*/
         },
     }
 </script>

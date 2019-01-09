@@ -9,9 +9,9 @@
                 <br>
 
                 <Card>
-                    <Col span="8"><h6>机器人id: {{bot_id}}</h6></Col> 
+                    <Col span="8"><h6>机器人ID: {{bot_id}}</h6></Col> 
                     <Col span="8"><h6>类型: {{bot_type}}</h6></Col>
-                    <Col span="8"><h6>状态: {{status}}</h6></Col>  
+                    <Col span="8"><h6>状态: {{botStatus}}</h6></Col>  
                     <br>
                 </Card>
 
@@ -133,7 +133,11 @@
                                         click: () => {
                                         this.$router.push({
                                             path:
-                                            "/groupdetail/" + this.managed_groups[params.index].group_id
+                                            "/groupdetail/",
+                                            query: {
+                                                bot_id: this.bot_id, 
+                                                group_id: this.managed_groups[params.index].group_id,
+                                            }
                                         });
                                         }
                                     }
@@ -159,24 +163,27 @@
         methods:{
 
             getBotInfo(){
-                this.$http.get('/robots/:' + this.bot_id) //使用axios发送请求
+                this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.bot_id) //使用axios发送请求
                     .then((res)=>{ //连接成功后回调函数
                         console.log("BotDetail get '/robots' 成功");
+
+                        console.log("botdata", res.data);
+
                         //type
-                        this.bot_type = res.data.data.bot_type;
+                        this.bot_type = res.data.entity.bot_type;
                         //managed_groups
-                        this.managed_groups = res.data.data.managed_groups;
+                        this.managed_groups = res.data.group_list;
                         //connect_url
-                        this.connect_url = res.data.data.connect_url;
+                        this.connect_url = res.data.connetionUrl;
                         //status
-                        if(res.data.data.status === 0)this.status = "未启动";
-                        else if(res.data.data.status === 1)this.status = "运行中";
-                        else if(res.data.data.status === 2)this.status = "故障";
-                        else this.status = "未登录";
-                        //console.log("stat", res.data.data);
+                        if(res.data.botStatus === 0)this.botStatus = "未启动";
+                        else if(res.data.botStatus === 1)this.botStatus = "运行中";
+                        else if(res.data.botStatus === 2)this.botStatus = "故障";
+                        else this.botStatus = "未登录";
+                        //console.log("stat", res.data);
                     })
                     .catch(function(err){
-                        console.log("连接错误"+err)
+                        console.log("连接错误" + err)
                     });
             },
 
@@ -186,7 +193,7 @@
                     groupslist.push(this.delet_groups[i].group_id);
 
                 //delete请求
-                this.$http.delete('/robots/deletegroups',{
+                this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/deletegroups',{
                     data:{
                         bot_id: this.bot_id,
                         delet_groups: groupslist,
@@ -224,17 +231,21 @@
                 this.$router.push({
                     path: "/botaddgroup",
                     query: {
-                        id: this.bot_id,
+                        bot_id: this.bot_id,
                     }
                 })      
             },
 
             jumplogin(){
-                if(this.status != "未登录"){
-                    console.log(this.status);
+                if(this.botStatus == "运行中"){
+                    console.log(this.botStatus);
                     this.$Message.success("你已登录过");
                 }
-                else window.open(this.connect_url)  
+                else if(this.botStatus == "故障"){
+                    console.log(this.botStatus);
+                    this.$Message.success("机器故障，无法登陆");
+                }
+                else window.open(this.connetionUrl)  
             }
         },
        

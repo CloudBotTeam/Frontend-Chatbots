@@ -47,7 +47,7 @@ export default {
     name: "buttons",
     data() {
         return {
-            group_id: this.$route.query.id,
+            group_id: this.$route.query.group_id,
             group_type:'',
             group_name:'',
             managed_servs: [],
@@ -74,12 +74,13 @@ export default {
                     ellipsis: "true",
                     key: "serv_id"
                 },
+                /*
                 {
                     title: "分类",
                     key: "serv_type",
                     ellipsis: "true",
                 },
-                
+                */
                 {
                     title: "查看",
                     key: "action",
@@ -117,7 +118,7 @@ export default {
                     } //render
                 } //{
             ],
-
+/*
             columns7: [
                 {
                     type: 'selection',
@@ -135,18 +136,18 @@ export default {
                     key: "id"
                 },
             ],
-            
+            */
         }; //return
     }, //data
   
     methods: {
         //获取所有可选service
         getServData(){
-            this.$http.get('/services') //使用axios发送请求
+            this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/services') //使用axios发送请求
             .then((res)=>{ //连接成功后回调函数
                 console.log("GroupAddServ get '/services' 成功");
 
-
+                /*
                 for(let i = 0; i < res.data.data.length; i++){
                     //service组
                     this.servlist_list.push(res.data.data[i])
@@ -155,22 +156,34 @@ export default {
                         for(let j = 0; j < res.data.data[i].serv_list.length; j++)
                             this.serv_list.push(res.data.data[i].serv_list[j]);
                     }
-                }       
+                }  
+                */
+
+                this.serv_list = res.data;
+
+                //禁止选择已在该group下的serv
+                for(let i = 0; i < this.serv_list.length; i++){
+                    for(let j = 0; j < this.managed_servs.length; j++){
+                        if(this.serv_list[i].serv_id === this.managed_servs[j].serv_id)
+                            this.serv_list[i]._disabled = true;
+                    }
+                }
+               
             })
             .catch(function(err){
                 console.log("GroupAddServ get '/services' 请求错误：" + err);
             });
         },
         getGroupInfo(){
-            this.$http.get('/groups/:' + this.group_id) //使用axios发送请求
+            this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/:' + this.group_id) //使用axios发送请求
             .then((res)=>{ //连接成功后回调函数
                 console.log("GroupAddServ get '/groups' 成功");
                 //name
-                this.group_name = res.data.data.group_name;
+                this.group_name = res.data.group_name;
                 //type
-                this.group_type = res.data.data.group_type;
+                this.group_type = res.data.group_type;
                 //managed_groups
-                this.managed_servs = res.data.data.managed_servs;
+                this.managed_servs = res.data.managed_servs;
             })
             .catch(function(err){
                 console.log("GroupAddServ get '/groups' 错误:" + err)
@@ -178,17 +191,21 @@ export default {
         },
         //已选中的要添加的service列表
         selectServ(select_servs) {
-            this.select_servs = select_servs;
+            //this.select_servs = select_servs;
+            this.add_servs = select_servs;
         },
         //已选中的要添加的service组列表
+        /*
         selectServList(select_servlists) {
             this.select_servlists = select_servlists;
         },
+        */
         Add(){
             if(this.select_servlists.length === 0 && this.select_servs.length === 0)
                 this.$Message.error('请选择要添加的Service');
             else{
                 //要添加的Service
+                /*
                 var select = new Array(40005); 
                 var serv_list = [];
 
@@ -206,11 +223,13 @@ export default {
                     }
                 }
                 this.add_servs = serv_list;
+                */
 
                 //post请求
-                this.$http.post('/groups/addservs',{
+                this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/' + this.group_id + '/services',{
                     data:{
                         group_id: this.group_id,
+                        bot_id: this.$route.query.bot_id,
                         add_servs: this.add_servs,
                     },
                     headers: {

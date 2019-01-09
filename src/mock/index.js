@@ -1,8 +1,8 @@
 import Mock from 'mockjs';
 import loginAPI from './login';
-import './botdata';
-import './groupdata';
-import './servdata';
+// import './botdata';
+// import './groupdata';
+// import './servdata';
 
 // 登录相关
 Mock.mock(/\/login\/loginbyemail/, 'post', loginAPI.loginByEmail);

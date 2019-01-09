@@ -56,7 +56,8 @@ export default {
                 ellipsis: "true",
                
                 render: (h, params) => {
-                  const status = parseInt(params.row.status);
+                  const status = parseInt(params.row.botStatus);
+                  console.log(params);
 
                   if (status === 0)
                     return h("div", [
@@ -169,7 +170,7 @@ export default {
     methods: {
       remove(index) {
         //delete请求
-        this.$http.delete('/robots/' + this.bot_list[index].bot_id,{
+        this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.bot_list[index].bot_id,{
           headers: {"Content-Type": "application/x-www-form-urlencoded"}
         })
         .then((response) => {
@@ -181,7 +182,6 @@ export default {
           this.bot_list.splice(index, 1);
 
           //更新page组件当前页视图
-          //太坑了太坑了太坑了
           var page = this.pageindex;
           this.page_bot_list = [];
           for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
@@ -212,37 +212,40 @@ export default {
       },
 
       getBotdata(){
-        this.$http.get('/robots') //使用axios发送请求
+        this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots') //使用axios发送请求
           .then((res)=>{ //连接成功后回调函数
             console.log("ChatBot get '/robots' 成功");
-            this.bot_list = res.data.data;
-            console.log(this.bot_list);
+            this.bot_list = res.data;
 
-            //显示第一页
-            //太坑了...终于解决了page_bot_list视图不及时渲染的问题
+            for(let i = 0; i < this.bot_list.length; i++)
+              this.bot_list[i].bot_type = res.data[i].entity.bot_type;
+
+            //显示第一页 解决page_bot_list视图不及时渲染的问题
             this.pageindex = 1;
             for (let i = 0; i < 10; i++) {
               if (i < this.bot_list.length) {
                 this.page_bot_list.push(this.bot_list[i]);
               }
             }
+          })
+          .catch((err) => {
+            console.log("Chatbot get '/robots' 请求错误：", err);
           });
       },
       // 确认删除所有bot
       deleteAll(){
         //delete请求
-        this.$http.delete('/robots',{
+        this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/robots',{
           headers: {"Content-Type": "application/x-www-form-urlencoded"}
         })
         .then((response) => {
+          console.log("Chatbot delete '/robots' 成功：", response);  
+
           this.$Message.success('已删除所有机器人');
           //删除前端数据
           this.bot_list = [];
-
           //更新page组件视图
           this.page_bot_list = [];
-
-          console.log(response);  
         })
         .catch((err) => {
           console.log("Chatbot delete '/robots' 请求错误：", err);

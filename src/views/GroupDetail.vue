@@ -38,7 +38,7 @@
             return {
                 json_list:[],
                 type:'',
-                group_id:this.$route.params.id,
+                group_id:this.$route.query.group_id,
                 group_name:'',
                 
                 page_result_list:[],
@@ -121,20 +121,19 @@
             const vue=this;
             var id=this.$route.params.id;
             let group_list=null;
-
             this.getGroupInfo();
         },
         methods:{
             getGroupInfo(){
-                this.$http.get('/groups' + this.group_id) //使用axios发送请求
+                this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/' + this.group_id) //使用axios发送请求
                 .then((res)=>{ //连接成功后回调函数
                     console.log("GroupDetail get '/groups' 成功");
                     //name
-                    this.group_name = res.data.data.group_name;
+                    this.group_name = res.data.group_name;
                     //type
-                    this.type = res.data.data.group_type;  
+                    this.type = res.data.group_type;  
                     //managed_servs
-                    this.managed_servs = res.data.data.managed_servs;
+                    this.managed_servs = res.data.managed_servs;
                 })
                 .catch(function(err){
                     console.log("连接错误"+err);
@@ -146,8 +145,9 @@
                     servslist.push(this.delet_servs[i].serv_id);
 
                 //delete请求
-                this.$http.delete('/groups/deleteservs',{
+                this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/' + this.group_id + '/services',{
                     data:{
+                        bot_id: this.bot_id,
                         group_id: this.group_id,
                         delet_servs: servslist,
                     },
@@ -184,7 +184,8 @@
                 this.$router.push({
                     path: "/groupaddserv",
                     query: {
-                        id: this.group_id,
+                        group_id: this.group_id,
+                        bot_id: this.$route.query.bot_id,
                     }
                 })      
             },
