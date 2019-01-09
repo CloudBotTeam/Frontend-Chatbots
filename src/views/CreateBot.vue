@@ -41,13 +41,13 @@ export default {
             else{
                 //post请求
                 console.log(this.bot_type);
+
+                let send_type = this.bot_type;
                 this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots',{
-                    data:{
-                        bot_type: this.bot_type
-                    },
-                    headers: {
-                        "Content-Type": "application/json",
-                    },      
+                    bot_type: send_type
+                    // headers: {
+                    //     "Content-Type": "application/json",
+                    // },
                 },{
                     emulateJSON: true
                 })
@@ -68,6 +68,6 @@ export default {
     mounted() {
     }
 };
-    
+
 </script>
 
