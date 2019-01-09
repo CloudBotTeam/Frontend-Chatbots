@@ -227,14 +227,9 @@ export default {
 
                 //post请求
                 this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/' + this.group_id + '/services',{
-                    data:{
-                        group_id: this.group_id,
-                        bot_id: this.$route.query.bot_id,
-                        add_servs: this.add_servs,
-                    },
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
+                    group_id: this.group_id,
+                    bot_id: this.$route.query.bot_id,
+                    add_servs: this.add_servs,
                 })
                 .then((response) => {
                     this.$Message.success('添加成功');

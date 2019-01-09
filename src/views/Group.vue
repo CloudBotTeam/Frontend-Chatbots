@@ -3,7 +3,7 @@
 
     <Row>
         <div style="" class="doc-header">
-            <h1>Group List</h1>
+            <h1>Group</h1>
         </div>
         <br>
         

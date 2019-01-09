@@ -4,7 +4,7 @@
     <!--Logo-->
     <a class="navbar-brand" ></a>
 
-    <!--折叠侧边栏-->
+    <!--折叠左侧边栏-->
     <ul class="nav navbar-nav d-md-down-none">
       <li class="nav-item">
         <a class="nav-link navbar-toggler sidebar-toggler"  @click="sidebarMinimize">&#9776;</a>
@@ -14,12 +14,11 @@
     <!--头像-->
     <ul class="nav navbar-nav ml-auto">
       <Dropdown class="nav-item">
-        <a href="javascript:void(0)">
-           <span slot="button">
-          <img src="static/img/avatar.jpg" class="img-avatar" style="width:50px" alt="o">
-          <span class="d-md-down-none">admin</span>
-          </span>
-        </a>
+        <div class="demo-avatar">
+          <Avatar size="large" style="background-color:#8DB6CD" icon="ios-analytics"/>
+          <span class="d-md-down-none" style="color:white">Admin</span>
+        </div>
+        
         <Dropdown-menu slot="list">
           <Dropdown-item >
             <p class="dropdown-itemp"><Icon type="android-settings"></Icon> Settings</p>
@@ -31,6 +30,7 @@
         </Dropdown-menu>
       </Dropdown>
 
+      <!--折叠右侧边栏-->
       <li class="nav-item d-md-down-none">
         <a class="nav-link navbar-toggler aside-menu-toggler"  @click="asideToggle">&#9776;</a>
       </li>

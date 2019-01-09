@@ -3,7 +3,7 @@ b<template>
 
     <Row>
       <div style="" class="doc-header">
-        <h1>ChatBot List</h1>
+        <h1>ChatBot</h1>
       </div>
       <br>
       <Col :md="24">   
@@ -19,10 +19,25 @@ b<template>
         ></Page>
       </Col>
     </Row>
-
-    <Button type="primary" size="large" icon="android-add-circle" 
-            style="padding-bottom:5px; margin-top: 10px" @click="jumpadd">创建机器人</Button>
-    
+    <Poptip placement="top" width="200">
+        <Button type="primary" size="large" icon="android-add-circle" 
+            style="padding-bottom:5px; margin-top: 10px">创建机器人</Button>
+        <div class="api" slot="content">
+          <Form :model="formItem" :label-width="25">
+            <p>选择机器人类型:</p><br>
+            <FormItem>
+                <RadioGroup type="button" @on-change="selectType">
+                    <Radio label="qq"></Radio>
+                    <Radio label="wechat"></Radio>
+                </RadioGroup>
+            </FormItem>
+            <FormItem>
+                <Button type="primary" @click="Create" style="width: 115px" 
+                        icon="android-add-circle">创建</Button>
+            </FormItem>
+          </Form>
+        </div>
+    </Poptip>
     <Poptip confirm title="确定要删除所有机器人吗？" @on-ok="deleteAll">
         <Button type="error" size="large" icon="android-remove-circle" 
                 style="padding-bottom:5px; margin-top: 10px">删除所有机器人</Button>
@@ -39,6 +54,8 @@ export default {
     
             pageindex: 1,
             page_bot_list: [],
+
+            create_bot_type: '',
 
             columns7: [
               {
@@ -195,12 +212,6 @@ export default {
         })
       },
 
-      jumpadd() {
-        this.$router.push({
-          path: "/createbot",
-        })      
-      },
-
       setInitPage(page) {
         this.page_bot_list = [];
         this.pageindex = page;
@@ -233,7 +244,7 @@ export default {
           });
       },
       // 确认删除所有bot
-      deleteAll(){
+      deleteAll(){ 
         //delete请求
         this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/robots',{
           headers: {"Content-Type": "application/x-www-form-urlencoded"}
@@ -251,11 +262,38 @@ export default {
           console.log("Chatbot delete '/robots' 请求错误：", err);
         })
       },
+
+      //选中的bot_type
+      selectType(selected_type) {
+        this.create_bot_type = selected_type;
+        console.log("type: ", this.create_bot_type)
+      },
+
+      //创建bot
+      Create(){
+        //未选择类型
+        if(this.create_bot_type == '')
+            this.$Message.error('请选择机器人类型');
+        //满足条件
+        else{
+          //post请求
+          this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots',{
+            bot_type: this.create_bot_type,      
+          })
+          .then((response) => {
+            this.$Message.success('创建成功');
+            console.log(response);
+          })
+          .catch((err) => {
+            console.log("ChatBot post '/robots' 请求错误：", err);
+          })
+        }
+      },
     },
 
     mounted() {
       this.setInitPage(1);
       this.getBotdata();
-    }
+    },
 };
 </script>

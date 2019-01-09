@@ -2,7 +2,7 @@
     <div class="animated fadeIn">
         <Row>
             <div style="" class="doc-header">
-                <h1>Service List</h1>
+                <h1>Service</h1>
                 <br>
             </div>
             <br>

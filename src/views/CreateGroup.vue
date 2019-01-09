@@ -208,14 +208,9 @@ export default {
 
                 //post请求
                 this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/addgroups',{
-                    data:{
-                        group_name: this.group_name,
-                        group_type: this.group_type,
-                        managed_servs: this.managed_servs,
-                    },
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
+                    group_name: this.group_name,
+                    group_type: this.group_type,
+                    managed_servs: this.managed_servs,
                 })
                 .then((response) => {
                     this.$Message.success('创建成功');
