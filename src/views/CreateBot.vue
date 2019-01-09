@@ -40,19 +40,16 @@ export default {
             //满足条件
             else{
                 //post请求
+                console.log(this.bot_type);
                 this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots',{
-                    'xhrFields' : {
-                        withCredentials: true
-                    },
-                    crossDomain: true,
                     data:{
-                        bot_type: this.bot_type,
+                        bot_type: this.bot_type
                     },
                     headers: {
                         "Content-Type": "application/json",
                     },      
                 },{
-                    emulateJSON:true
+                    emulateJSON: true
                 })
                 .then((response) => {
                     this.$Message.success('创建成功');
