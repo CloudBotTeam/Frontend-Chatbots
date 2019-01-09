@@ -67,17 +67,17 @@ export default {
   methods: {
     getBotdata(){
         let that = this;
-        this.$http.get('/robots') //使用axios发送请求
+        this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots') //使用axios发送请求
           .then(function(res){ //连接成功后回调函数
             console.log("Aside get '/robots' 成功");
-            that.total_bots = res.data.data.length;
+            that.total_bots = res.data.length;
             for (let i = 0; i < that.total_bots; i++) {
-              if(res.data.data[i].status === 0) that.waitting_bots++;
-              else if(res.data.data[i].status === 1) that.running_bots++;
-              else if(res.data.data[i].status === 2) that.fault_bots++;
+              if(res.data[i].botStatus === 0) that.waitting_bots++;
+              else if(res.data[i].botStatus === 1) that.running_bots++;
+              else if(res.data[i].botStatus === 2) that.fault_bots++;
               else that.logout_bots++;
 
-              if(res.data.data[i].bot_type === 'QQ') that.qq_bots++;
+              if(res.data[i].entity.bot_type === 'qq') that.qq_bots++;
               else that.wechat_bots++;
             }
             that.running_percent = that.running_bots / that.total_bots * 100;
@@ -89,7 +89,7 @@ export default {
             that.wechat_percent = that.wechat_bots / that.total_bots * 100;
           })
           .catch(function(err){
-            console.log("连接错误"+err);
+            console.log("连接错误" + err);
           });
       }
   },
