@@ -192,7 +192,10 @@ export default {
         //已选中的要添加的service列表
         selectServ(select_servs) {
             //this.select_servs = select_servs;
-            this.add_servs = select_servs;
+            for(let i = 0; i < select_servs.length; i++)
+                this.add_servs.push({
+                    serv: select_servs[i].serv_id,
+                });
         },
         //已选中的要添加的service组列表
         /*
@@ -229,7 +232,7 @@ export default {
                 this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/' + this.group_id + '/services',{
                     group_id: this.group_id,
                     bot_id: this.$route.query.bot_id,
-                    add_servs: this.add_servs,
+                    services: this.add_servs,
                 })
                 .then((response) => {
                     this.$Message.success('添加成功');
