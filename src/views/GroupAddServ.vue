@@ -8,27 +8,26 @@
         <br>
 
         <Card>
-            <Col span="8"><h6>群名称: {{group_name}}</h6></Col> 
-            <Col span="8"><h6>群id: {{group_id}}</h6></Col> 
-            <Col span="8"><h6>类型: {{group_type}}</h6></Col>  
+            <Col span="8"><h6>群ID: {{group_id}}</h6></Col>  
+            <Col span="8"><h6>机器人ID: {{bot_id}}</h6></Col>  
+            <Col span="8"><h6>机器人类型: {{bot_type}}</h6></Col>  
             <br>
         </Card>
         <br><hr><br>
         
         <Col :md="24">
-            
+            <!--
             <h5>选择Service组</h5>
             <br>
             <div style="position:relative;">
                 <Table border ref="selection" :columns="columns7" :height="200" 
                     :data="servlist_list" @on-selection-change="selectServList"></Table>    
             </div>
-
-            <br><hr><br>
+            -->
             <h5>选择Service</h5>
             <br>
             <div style="position:relative;">
-                <Table border ref="selection" :columns="columns6" :height="450" 
+                <Table border ref="selection" :columns="columns6" :height="250" 
                     :data="serv_list" @on-selection-change="selectServ"></Table>    
             </div>
 
@@ -47,6 +46,8 @@ export default {
     name: "buttons",
     data() {
         return {
+            bot_id: this.$route.query.bot_id,
+            bot_type: this.$route.query.bot_type,
             group_id: this.$route.query.group_id,
             group_type:'',
             group_name:'',
@@ -159,7 +160,7 @@ export default {
                 }  
                 */
 
-                this.serv_list = res.data;
+                this.serv_list = res.data.serv_list;
 
                 //禁止选择已在该group下的serv
                 for(let i = 0; i < this.serv_list.length; i++){
@@ -175,13 +176,9 @@ export default {
             });
         },
         getGroupInfo(){
-            this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/:' + this.group_id) //使用axios发送请求
+            this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.bot_id + '/groups/' + this.group_id) //使用axios发送请求
             .then((res)=>{ //连接成功后回调函数
                 console.log("GroupAddServ get '/groups' 成功");
-                //name
-                this.group_name = res.data.group_name;
-                //type
-                this.group_type = res.data.group_type;
                 //managed_groups
                 this.managed_servs = res.data.managed_servs;
             })
@@ -192,10 +189,7 @@ export default {
         //已选中的要添加的service列表
         selectServ(select_servs) {
             //this.select_servs = select_servs;
-            for(let i = 0; i < select_servs.length; i++)
-                this.add_servs.push({
-                    serv: select_servs[i].serv_id,
-                });
+            this.add_servs = select_servs;
         },
         //已选中的要添加的service组列表
         /*
@@ -204,7 +198,7 @@ export default {
         },
         */
         Add(){
-            if(this.select_servlists.length === 0 && this.select_servs.length === 0)
+            if(this.add_servs.length === 0)
                 this.$Message.error('请选择要添加的Service');
             else{
                 //要添加的Service
@@ -227,11 +221,16 @@ export default {
                 }
                 this.add_servs = serv_list;
                 */
-
+                var services = [];
+                for(let i = 0; i < this.add_servs.length; i++){   
+                    services.push({
+                        serv: this.add_servs[i].serv_id,
+                    })
+                } 
+                  
                 //post请求
                 this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/' + this.group_id + '/services',{
-                    group_id: this.group_id,
-                    bot_id: this.$route.query.bot_id,
+                    group: this.group_id,
                     services: this.add_servs,
                 })
                 .then((response) => {

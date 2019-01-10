@@ -49,7 +49,7 @@ export const asyncRouterMap = [
       { path: '/botaddgroup', name: 'BotAddGroup', hidden: true, component: _import('BotAddGroup') },
 
       { path: '/group', name: 'Group', icon: "android-contacts", component: _import('Group') },
-      { path: '/groupdetail/:id', name: 'GroupDetail', hidden: true, component: _import('GroupDetail') },
+      { path: '/groupdetail/:bot_id/:group_id', name: 'GroupDetail', hidden: true, component: _import('GroupDetail') },
       { path: '/creategroup', name: 'CreateGroup', hidden: true, component: _import('CreateGroup') },
       { path: '/groupaddserv', name: 'GroupAddServ', hidden: true, component: _import('GroupAddServ') },
 

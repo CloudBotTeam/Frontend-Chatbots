@@ -281,8 +281,21 @@ export default {
             bot_type: this.create_bot_type,      
           })
           .then((response) => {
-            this.$Message.success('创建成功');
             console.log(response);
+
+            this.$Message.success('创建成功');
+
+            this.bot_list.push(response.data);
+            this.bot_list[this.bot_list.length - 1].bot_type = response.data.entity.bot_type;
+
+            //更新page组件当前页视图
+            var page = this.pageindex;
+            this.page_bot_list = [];
+            for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
+              if (i < this.bot_list.length) {
+                this.page_bot_list.push(this.bot_list[i]);
+              }
+            }
           })
           .catch((err) => {
             console.log("ChatBot post '/robots' 请求错误：", err);

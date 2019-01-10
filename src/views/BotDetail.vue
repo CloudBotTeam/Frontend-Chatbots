@@ -27,9 +27,8 @@
         </Row>
 
         <Button type="success" size="large" icon="ios-contact" style="padding-bottom:5px;" @click="jumplogin">登录</Button>
-  
         <Button type="primary" size="large" icon="android-add-circle" style="padding-bottom:5px;" @click="jumpadd">添加群</Button>
-        <Button type="primary" size="large" icon="android-remove-circle" style="padding-bottom:5px;" @click="remove">删除所选群</Button>    
+        <Button type="error" size="large" icon="android-remove-circle" style="padding-bottom:5px;" @click="remove">删除所选群</Button>    
     </div>
 
 </template>
@@ -62,54 +61,15 @@
                         align: 'center',
                     },
                     {
-                        title: '名称',
+                        title: '群ID',
                          render: (h, params) => {
                              
                              return h('div', [
-                                 h('strong',{
-                                    style:{
-                                      color:"#2d8cf0",
-                                        cursor:"pointer",
-                                    },
-
-                                  }, params.row.group_name)
-                               ]);
-                        },
-                       
-                    },
-                    {
-                        title: 'ID',
-                         render: (h, params) => {
-                             
-                             return h('div', [
-                                 h('strong', params.row.group_id)
+                                 h('strong', params.row.group)
                                ]);
                         },
                        
                     }, 
-                    {
-                        title: '分类',
-                        key: 'group_type',
-
-                        filters: [
-                            {
-                                label: '',
-                                value: 0
-                            },
-                            {
-                                label: '',
-                                value: 1
-                            }
-                        ],
-                        filterMultiple: false,
-                        filterMethod (value, row) {
-                            if (value === 0) {
-                                return row.group_type===0;
-                            } else if (value === 1) {
-                                return row.group_type ===1;
-                            }
-                        }
-                    },
                     {
                         title: "查看",
                         key: "action",
@@ -133,10 +93,9 @@
                                         click: () => {
                                         this.$router.push({
                                             path:
-                                            "/groupdetail/",
-                                            query: {
-                                                bot_id: this.bot_id, 
-                                                group_id: this.managed_groups[params.index].group_id,
+                                            "/groupdetail/" + this.bot_id + '/' + this.managed_groups[params.index].group,
+                                            query:{
+                                                bot_type: this.bot_type,
                                             }
                                         });
                                         }
@@ -188,38 +147,46 @@
             },
 
             remove(){
-                var groupslist = [];
-                for(let i = 0; i < this.delet_groups.length; i++)
-                    groupslist.push(this.delet_groups[i].group_id);
-
-                //delete请求
-                this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/deletegroups',{
-                    data:{
-                        bot_id: this.bot_id,
-                        delet_groups: groupslist,
-                    },
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then((response) => {
-                    this.$Message.success('成功删除');
-
-                    //删除前端数据
+                if(this.delet_groups.length === 0)
+                    this.$Message.error('请选择要删除的群');
+                else{    
+                    var groupslist = [];
                     for(let i = 0; i < this.delet_groups.length; i++){
-                        for(let j = 0; j < this.managed_groups.length; j++){
-                            if(this.delet_groups[i].group_id === this.managed_groups[j].group_id){
-                                this.managed_groups.splice(j, 1);
-                                continue;
+                        groupslist.push({
+                            group: this.delet_groups[i].group,
+                        });
+                    }
+                    console.log("deletegroup: ", groupslist)
+
+                    //delete请求
+                    this.$http.delete(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/deletegroups',{
+                        data:{
+                            delete_groups: groupslist,
+                            bot_id: this.bot_id,
+                        },
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    })
+                    .then((response) => {
+                        this.$Message.success('成功删除');
+
+                        //删除前端数据
+                        for(let i = 0; i < this.delet_groups.length; i++){
+                            for(let j = 0; j < this.managed_groups.length; j++){
+                                if(this.delet_groups[i].group === this.managed_groups[j].group){
+                                    this.managed_groups.splice(j, 1);
+                                    continue;
+                                }
                             }
                         }
-                    }
 
-                    console.log(response);
-                })
-                .catch((err) => {
-                    console.log('Botdetail delete 请求错误：', err);
-                })
+                        console.log(response);
+                    })
+                    .catch((err) => {
+                        console.log('Botdetail delete 请求错误：', err);
+                    })
+                }
             },
 
             deletList(arr) {
@@ -237,6 +204,7 @@
             },
 
             jumplogin(){
+                console.log("jump:", this.connect_url)
                 if(this.botStatus == "运行中"){
                     console.log(this.botStatus);
                     this.$Message.success("你已登录过");
@@ -245,7 +213,7 @@
                     console.log(this.botStatus);
                     this.$Message.success("机器故障，无法登陆");
                 }
-                else window.open(this.connetionUrl)  
+                else window.open(this.connect_url)  
             }
         },
        

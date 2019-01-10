@@ -76,11 +76,13 @@ export default {
   
     methods: {
         getBotInfo(){
-            this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/:' + this.bot_id) //使用axios发送请求
+            this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.bot_id) //使用axios发送请求
             .then((res)=>{ //连接成功后回调函数
                 console.log("BotAddGroup get '/robots' 成功");
+                
                 //type
-                this.bot_type = res.data.bot_type;
+                this.bot_type = res.data.entity.bot_type;
+
                 //managed_groups
                 this.managed_groups = res.data.managed_groups;
             })
@@ -105,13 +107,14 @@ export default {
             //验证输入是否合法
             this.$refs[name].validate((valid) => {
                 if (valid) {
-                    for(let i = 0; i < this.formDynamic.items.length; i++)
-                        this.add_groups.push(this.formDynamic.items[i].value);
+                    //for(let i = 0; i < this.formDynamic.items.length; i++)
+                    //    this.add_groups.push(this.formDynamic.items[i].value);
+                    console.log("group: ", this.formDynamic.items[0].value);
 
                     //post请求
-                    this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/addgroups',{
-                        bot_id: this.bot_id,
-                        add_groups: this.add_groups,
+                    this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.bot_id + '/groups',{
+                        //group: this.add_groups,
+                        group: this.formDynamic.items[0].value,
                     })
                     .then((response) => {
                         this.$Message.success('添加成功');
@@ -132,7 +135,6 @@ export default {
         },
     },
     mounted() {
-        this.getGroupdata();
         this.getBotInfo();
     }
 };

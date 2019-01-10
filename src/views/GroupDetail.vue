@@ -9,9 +9,9 @@
 
             <Col span="24">
                 <Card>
-                    <Col span="8"><h6>群名称: {{group_name}}</h6></Col> 
-                    <Col span="8"><h6>群id: {{group_id}}</h6></Col> 
-                    <Col span="8"><h6>类型: {{type}}</h6></Col>  
+                    <Col span="8"><h6>群ID: {{group_id}}</h6></Col> 
+                    <Col span="8"><h6>机器人ID: {{bot_id}}</h6></Col>
+                    <Col span="8"><h6>机器人类型: {{bot_type}}</h6></Col> 
                     <br>
                 </Card>
 
@@ -27,7 +27,7 @@
         </Row>
 
         <Button type="primary" size="large" icon="android-add-circle" style="padding-grouptom:5px;" @click="jumpadd">添加Service</Button>
-        <Button type="primary" size="large" icon="android-remove-circle" style="padding-grouptom:5px;" @click="remove">删除选中Service</Button>    
+        <Button type="error" size="large" icon="android-remove-circle" style="padding-grouptom:5px;" @click="remove">删除选中Service</Button>    
     </div>
 </template>
 
@@ -38,9 +38,10 @@
             return {
                 json_list:[],
                 type:'',
-                group_id:this.$route.query.group_id,
-                group_name:'',
-                
+                bot_type:this.$route.query.bot_type,
+                bot_id:this.$route.params.bot_id,
+                group_id:this.$route.params.group_id,
+
                 page_result_list:[],
                 managed_servs:[],
                 delet_servs:[],
@@ -118,22 +119,17 @@
 
         },
         mounted(){
-            const vue=this;
-            var id=this.$route.params.id;
-            let group_list=null;
             this.getGroupInfo();
         },
         methods:{
             getGroupInfo(){
-                this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/' + this.group_id) //使用axios发送请求
+                console.log(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.params.bot_id + '/groups/' + this.group_id);
+                this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.params.bot_id + '/groups/' + this.group_id) //使用axios发送请求
                 .then((res)=>{ //连接成功后回调函数
                     console.log("GroupDetail get '/groups' 成功");
-                    //name
-                    this.group_name = res.data.group_name;
-                    //type
-                    this.type = res.data.group_type;  
                     //managed_servs
-                    this.managed_servs = res.data.managed_servs;
+                    console.log(res.data);
+                    this.managed_servs = res.data.servList;
                 })
                 .catch(function(err){
                     console.log("连接错误"+err);
@@ -185,7 +181,8 @@
                     path: "/groupaddserv",
                     query: {
                         group_id: this.group_id,
-                        bot_id: this.$route.query.bot_id,
+                        bot_id: this.bot_id,
+                        bot_type: this.bot_type,
                     }
                 })      
             },

@@ -24,7 +24,6 @@
     <!--
     <Button type="primary" size="large" icon="android-add-circle" 
             style="padding-bottom:5px; margin-top: 10px" @click="jumpadd">创建群</Button>
-    
     <Poptip confirm title="确定要删除所有群吗？" @on-ok="deleteAll">
         <Button type="error" size="large" icon="android-remove-circle" 
                 style="padding-bottom:5px; margin-top: 10px">删除所有群</Button>
@@ -46,21 +45,11 @@ export default {
 
           columns7: [
             {
-              title: "群名称",
-              key: "group_name",
-              ellipsis: "true"
-            },
-            {
-              title: "群id",
+              title: "群ID",
               ellipsis: "true",
-              key: "group_id"
+              key: "group"
             },
-            {
-              title: "类型",
-              key: "group_type",
-              ellipsis: "true",
-            },
-            
+            /*
             {
                 title: "操作",
                 key: "action",
@@ -86,7 +75,7 @@ export default {
                                         this.$router.push({
                                             path:
                                             "groupdetail/" + 
-                                            this.group_list[(this.pageindex - 1) * 10 + params.index].group_id
+                                            this.group_list[(this.pageindex - 1) * 10 + params.index].group
                                         });
                                     }
                                 }
@@ -111,7 +100,7 @@ export default {
                     ]);
             
                 } //render
-            } //{
+            } //{*/
         ] //cloumn
     }; //return
   }, //data
@@ -131,7 +120,6 @@ export default {
         this.group_list.splice(index, 1);
 
         //更新page组件当前页视图
-        //太坑了太坑了太坑了
         var page = this.pageindex;
         this.page_group_list = [];
         for (let i = (page - 1) * 10; i < (page - 1) * 10 + 10; i++) {
@@ -158,10 +146,9 @@ export default {
         this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/groups') //使用axios发送请求
         .then((res)=>{ //连接成功后回调函数
           console.log("get '/groups' 成功");
-          this.group_list = res.data.data;
+          this.group_list = res.data;
 
-          //显示第一页
-          //太坑了...终于解决了page_group_list视图不及时渲染的问题
+          //显示第一页 解决了page_group_list视图不及时渲染的问题
           this.pageindex = 1;
           for (let i = 0; i < 10; i++) {
             if (i < this.group_list.length) {
@@ -173,6 +160,7 @@ export default {
           console.log("连接错误"+err);
         });
     },
+    /*
     jumpadd() {
       var maxid = '';
       for (let i = 0; i < this.group_list.length; i++) 
@@ -201,7 +189,7 @@ export default {
       .catch((err) => {
         console.log("Group delete '/groups' 请求错误：", err);
       })
-    },
+    },*/
   },
   mounted() {
     this.setInitPage(1);
