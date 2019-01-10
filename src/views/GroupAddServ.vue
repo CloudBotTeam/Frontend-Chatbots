@@ -231,7 +231,7 @@ export default {
                 //post请求
                 this.$http.post(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.query.bot_id + '/groups/' + this.group_id + '/services',{
                     group: this.group_id,
-                    services: this.add_servs,
+                    services: services,
                 })
                 .then((response) => {
                     this.$Message.success('添加成功');

@@ -123,12 +123,11 @@
         },
         methods:{
             getGroupInfo(){
-                console.log(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.params.bot_id + '/groups/' + this.group_id);
                 this.$http.get(this.global.QueryAdd + ':' + this.global.gateWay + '/robots/' + this.$route.params.bot_id + '/groups/' + this.group_id) //使用axios发送请求
                 .then((res)=>{ //连接成功后回调函数
                     console.log("GroupDetail get '/groups' 成功");
                     //managed_servs
-                    console.log(res.data);
+                    console.log("res.data:", res);
                     this.managed_servs = res.data.servList;
                 })
                 .catch(function(err){

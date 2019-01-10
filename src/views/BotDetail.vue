@@ -204,7 +204,6 @@
             },
 
             jumplogin(){
-                console.log("jump:", this.connect_url)
                 if(this.botStatus == "运行中"){
                     console.log(this.botStatus);
                     this.$Message.success("你已登录过");
@@ -213,7 +212,11 @@
                     console.log(this.botStatus);
                     this.$Message.success("机器故障，无法登陆");
                 }
-                else window.open(this.connect_url)  
+                else{
+                    if(this.bot_type == 'qq')
+                        window.open('http://' + this.connect_url)
+                    else window.open(this.connect_url)
+                }  
             }
         },
        
